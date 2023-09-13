@@ -16,11 +16,11 @@ You need Node.js version 10 or above installed on your machine to use the Conten
 #### Node
 Install it via npm:
 ```bash
-npm i @contentstack/management
+npm i @contentstack/marketplace
 ```
 To import the SDK, use the following command:
 ```
-import contentstack from ‘@contentstack/management’
+import contentstack from ‘@contentstack/marketplace’
 
 contentstackClient = contentstack.client()
 ```
@@ -55,46 +55,9 @@ contentstackClient.stack({ api_key: 'API_KEY', management_token: 'MANAGEMENT_TOK
 #### Initializing Your SDK:
 To use the JavaScript CMA SDK, you need to first initialize it. To do this, use the following code:
 ```
-import contentstack from ‘@contentstack/management’
+import contentstack from ‘@contentstack/marketplace’
 
 var contentstackClient = contentstack.client({ authtoken: 'AUTHTOKEN' })
-```
-#### Fetch Stack Detail
-Use the following lines of code to fetch your stack detail using this SDK:
-```
-contentstackClient.stack({ api_key: 'API_KEY' })
-.fetch()
-.then((stack) => {
-	console.log(stack)
-})
-```
-
-#### Create Entry
-To create an entry in a specific content type of a stack, use the following lines of code:
-```
-var  entry  = {
-	title: 'Sample Entry',
-	url: '/sampleEntry'
-}
-
-contentstackClient.stack({ api_key: 'API_KEY' }).contentType('CONTENT_TYPE_UID').entry().create({ entry })
-.then((entry) => {
-	console.log(entry)
-})
-```
-
-#### Create Asset
-The following lines of code can be used to upload assets to your stack:
-```
-var  asset  = {
-	upload: 'path/to/file',
-	title: 'Asset Title'
-}
-
-contentstackClient.stack({ api_key: 'API_KEY' }).asset().create({ asset })
-.then((asset) => {
-	console.log(asset)
-})
 ```
 
 ### Helpful Links
