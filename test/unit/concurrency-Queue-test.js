@@ -10,6 +10,9 @@ import { createReadStream } from 'fs'
 import path from 'path'
 import multiparty from 'multiparty'
 import { client } from '../../lib/contentstack'
+import dotenv from 'dotenv'
+import contentstackClient from '../../lib/contentstackClient'
+dotenv.config()
 const axios = Axios.create()
 
 let server
@@ -127,16 +130,17 @@ describe('Concurrency queue test', () => {
   })
 
   it('Refresh Token on 401 with 1000 concurrent request', done => {
-    const axios2 = client({
-      baseURL: `${host}:${port}`
+    var mock = new MockAdapter(axios)
+    mock.onPost('https://api.contentstack.io:443/v3/user-session').reply(200, {
+      token
     })
-    const axios = client({
+    const axiosClient = client({
       baseURL: `${host}:${port}`,
       authorization: 'Bearer <token_value>',
       logHandler: logHandlerStub,
       refreshToken: () => {
         return new Promise((resolve, reject) => {
-          return axios2.login().then((res) => {
+          return contentstackClient({ http: axios }).login().then((res) => {
             resolve({ authorization: res.token })
           }).catch((error) => {
             reject(error)
@@ -144,7 +148,7 @@ describe('Concurrency queue test', () => {
         })
       }
     })
-    Promise.all(sequence(1003).map(() => axios.axiosInstance.get('/unauthorized')))
+    Promise.all(sequence(1003).map(() => axiosClient.axiosInstance.get('/unauthorized')))
       .then((responses) => {
         return responses.map(r => r.config.headers.authorization)
       })

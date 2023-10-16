@@ -7,12 +7,12 @@ import { expect } from 'chai'
 dotenv.config()
 
 let stack = {}
-const orgID = process.env.ORGANIZATION
+const orgID = process.env.ORG_UID
 let client = {}
 let appUid = ''
 let installationUid = ''
 const app = {
-  name: 'My New App',
+  name: 'bbbb',
   description: 'My new test app',
   target_type: 'organization'
 }
@@ -40,7 +40,7 @@ describe('Apps api Test', () => {
   })
 
   it('Fetch all authorized apps test', done => {
-    client.marketplace(orgID).findAllAuthorized()
+    client.marketplace(orgID).findAllAuthorizedApps()
       .then((apps) => {
         for (const index in apps.data) {
           const appObject = apps.data[index]
@@ -118,13 +118,13 @@ describe('Apps api Test', () => {
   })
 
   it('Install app test', done => {
-    client.marketplace(orgID).app(appUid).install({ targetType: 'stack', targetUid: stack.api_key })
+    client.marketplace(orgID).app(appUid).install({ targetType: 'organization', targetUid: orgID })
       .then((installation) => {
-        installationUid = installation.uid
+        installationUid = installation.installation_uid
         jsonWrite(installation, 'installation.json')
-        expect(installation.uid).to.not.equal(undefined)
+        expect(installation.installation_uid).to.not.equal(undefined)
         expect(installation.params.organization_uid).to.be.equal(orgID)
-        expect(installation.urlPath).to.be.equal(`/installations/${installation.uid}`)
+        expect(installation.urlPath).to.be.equal(`/installations/${installation.installation_uid}`)
         expect(installation.fetch).to.not.equal(undefined)
         expect(installation.update).to.not.equal(undefined)
         expect(installation.uninstall).to.not.equal(undefined)
@@ -163,7 +163,7 @@ describe('Apps api Test', () => {
       }).catch(done)
   })
   it('Set server config for installation test', done => {
-    client.marketplace(orgID).installation(installationUid).serServerConfig({})
+    client.marketplace(orgID).installation(installationUid).setServerConfig({})
       .then((config) => {
         expect(config.data).to.deep.equal({})
         done()
@@ -175,9 +175,9 @@ describe('Apps api Test', () => {
       .then((installation) => {
         expect(installation.uid).to.be.equal(installationUid)
         expect(installation.params.organization_uid).to.be.equal(orgID)
-        expect(installation.urlPath).to.be.equal(`/installations/${installation.uid}`)
-        expect(installation.target.type).to.be.equal('stack')
-        expect(installation.target.uid).to.be.equal(stack.api_key)
+        expect(installation.urlPath).to.be.equal(`/installations/${installation.installation_uid}`)
+        expect(installation.target.type).to.be.equal('organization')
+        expect(installation.target.uid).to.be.equal(orgID)
         expect(installation.status).to.be.equal('installed')
         done()
       }).catch(done)

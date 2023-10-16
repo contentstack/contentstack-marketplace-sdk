@@ -7,7 +7,7 @@ import { appsMock } from './mock/objects'
 import { App } from '../../lib/marketplace/app'
 import { Installation } from '../../lib/marketplace/installation'
 import { AppRequest } from '../../lib/marketplace/apprequest'
-describe('marketplace test', () => {
+describe('Marketplace test', () => {
   it('should create Marketplace object with params when marketplace function is called with data', () => {
     const mktplace = marketplaceObj({ organization_uid: 'organization_uid' })
     expect(mktplace).to.be.instanceOf(Marketplace)
@@ -22,18 +22,18 @@ describe('marketplace test', () => {
   it('should create Marketplace object without params when marketplace function is called without data', () => {
     const mktplace = marketplaceObj({})
     expect(mktplace).to.be.instanceOf(Marketplace)
-    expect(mktplace.app).to.not.equal(undefined)
-    expect(mktplace.appRequests).to.not.equal(undefined)
-    expect(mktplace.findAllApps).to.not.equal(undefined)
-    expect(mktplace.findAllAuthorizedApps).to.not.equal(undefined)
-    expect(mktplace.installation).to.not.equal(undefined)
+    expect(mktplace.app).to.be.equal(undefined)
+    expect(mktplace.appRequests).to.be.equal(undefined)
+    expect(mktplace.findAllApps).to.be.equal(undefined)
+    expect(mktplace.findAllAuthorizedApps).to.be.equal(undefined)
+    expect(mktplace.installation).to.be.equal(undefined)
     expect(mktplace.params).to.be.eql({})
   })
 
   it('should get object of App when app function is called with uid', () => {
     const appUid = 'manifestUid'
-    const app = marketplaceObj({}).app(appUid)
-    const appWithoutUid = marketplaceObj({}).app()
+    const app = marketplaceObj({ organization_uid: 'org_uid' }).app(appUid)
+    const appWithoutUid = marketplaceObj({ organization_uid: 'org_uid' }).app()
 
     expect(app).to.be.instanceOf(App)
     expect(app.uid).to.be.equal(appUid)
@@ -46,11 +46,11 @@ describe('marketplace test', () => {
 
   it('should get object of Installation when installation function is called with uid', () => {
     const instUid = 'manifestUid'
-    const instObj = marketplaceObj({}).installation(instUid)
-    const instObjWithoutUid = marketplaceObj({}).installation()
+    const instObj = marketplaceObj({ organization_uid: 'org_uid' }).installation(instUid)
+    const instObjWithoutUid = marketplaceObj({ organization_uid: 'org_uid' }).installation()
 
     expect(instObj).to.be.instanceOf(Installation)
-    expect(instObj.uid).to.be.equal(instUid)
+    expect(instObj.uid).to.be.equal(undefined)
     expect(instObj.fetch).to.not.equal(undefined)
     expect(instObj.fetchAll).to.be.equal(undefined)
 
@@ -61,7 +61,7 @@ describe('marketplace test', () => {
   })
 
   it('should get object of AppRequest when appRequests function is called', () => {
-    const appReq = marketplaceObj({}).appRequests()
+    const appReq = marketplaceObj({ organization_uid: 'org_uid' }).appRequests()
     expect(appReq).to.be.instanceOf(AppRequest)
   })
 
@@ -69,7 +69,7 @@ describe('marketplace test', () => {
     const mock = new MockAdapter(Axios)
     mock.onGet(`/manifests`).reply(200, appsMock)
 
-    marketplaceObj({})
+    marketplaceObj({ organization_uid: 'org_uid' })
       .findAllApps()
       .then((response) => {
         expect(response.items[0].visibility).to.be.equal(appsMock.data[0].visibility)
@@ -88,7 +88,7 @@ describe('marketplace test', () => {
     const mock = new MockAdapter(Axios)
     mock.onGet(`/manifests`).reply(400, {})
 
-    marketplaceObj({})
+    marketplaceObj({ organization_uid: 'org_uid' })
       .findAllApps()
       .then(done)
       .catch((error) => {
@@ -114,7 +114,7 @@ describe('marketplace test', () => {
       ]
     })
 
-    marketplaceObj({})
+    marketplaceObj({ organization_uid: 'org_uid' })
       .findAllAuthorizedApps({ skip: 10 })
       .then((response) => {
         expect(response.data[0].visibility).to.be.equal(content.visibility)
@@ -133,7 +133,7 @@ describe('marketplace test', () => {
     const mock = new MockAdapter(Axios)
     mock.onGet(`/authorized-apps`).reply(400, {})
 
-    marketplaceObj({})
+    marketplaceObj({ organization_uid: 'org_uid' })
       .findAllAuthorizedApps()
       .then(done)
       .catch((error) => {
