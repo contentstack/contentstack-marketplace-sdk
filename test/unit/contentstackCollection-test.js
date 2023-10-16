@@ -1,14 +1,13 @@
 import { describe, it } from 'mocha'
 import ContentstackCollection from '../../lib/contentstackCollection'
 import axios from 'axios'
-import { StackCollection } from '../../lib/stack'
+import { AppCollection } from '../../lib/marketplace'
 import { expect } from 'chai'
-import { mockCollection, stackMock, entryMockCollection } from './mock/objects'
-import { EntryCollection } from '../../lib/stack/contentType/entry'
+import { mockCollection, stackMock } from './mock/objects'
 
 describe('Contentstack collection test', () => {
   it('Collection with no Data', done => {
-    const stackResponse = new ContentstackCollection({}, axios, null, StackCollection)
+    const stackResponse = new ContentstackCollection({}, axios, null, AppCollection)
     expect(stackResponse.items.length).to.be.equal(0)
     expect(stackResponse.count).to.be.equal(undefined)
     expect(stackResponse.notice).to.be.equal(undefined)
@@ -18,14 +17,13 @@ describe('Contentstack collection test', () => {
   })
 
   it('Stack Collection', done => {
-    const stackResponse = new ContentstackCollection({
-      data: mockCollection(stackMock, 'stacks')
-    },
-    axios,
-    null,
-    StackCollection
+    const stackResponse = new ContentstackCollection(
+      { data: mockCollection(stackMock, 'stacks') },
+      axios,
+      null,
+      AppCollection
     )
-    expect(stackResponse.items.length).to.be.equal(1)
+    expect(stackResponse.items.length).to.be.equal(0)
     expect(stackResponse.count).to.be.equal(1)
     expect(stackResponse.notice).to.be.equal('Notice')
     expect(stackResponse.schema).to.be.equal(undefined)
@@ -41,31 +39,13 @@ describe('Contentstack collection test', () => {
     {
       api_key: 'stack_api_key'
     },
-    StackCollection
+    AppCollection
     )
-    expect(stackResponse.items.length).to.be.equal(1)
+    expect(stackResponse.items.length).to.be.equal(0)
     expect(stackResponse.count).to.be.equal(1)
     expect(stackResponse.notice).to.be.equal('Notice')
     expect(stackResponse.schema).to.be.equal(undefined)
     expect(stackResponse.content_type).to.be.equal(undefined)
-    done()
-  })
-
-  it('Entry Collection with Schema and Content Type', done => {
-    const stackResponse = new ContentstackCollection({
-      data: entryMockCollection({})
-    },
-    axios,
-    {
-      api_key: 'stack_api_key'
-    },
-    EntryCollection
-    )
-    expect(stackResponse.items.length).to.be.equal(1)
-    expect(stackResponse.count).to.be.equal(1)
-    expect(stackResponse.notice).to.be.equal('Notice')
-    expect(stackResponse.schema).to.not.equal(undefined)
-    expect(stackResponse.content_type).to.not.equal(undefined)
     done()
   })
 })

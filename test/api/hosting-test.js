@@ -7,7 +7,7 @@ import { expect } from 'chai'
 dotenv.config()
 
 let apps = {}
-const orgID = process.env.ORGANIZATION
+const orgID = process.env.ORG_UID
 let client = {}
 let uploadUid = ''
 let deploymentUid = ''
@@ -19,7 +19,8 @@ describe('Apps hosting api Test', () => {
   })
 
   it('test get apps hosting details', done => {
-    makeHosting(apps.uid).isEnable()
+    const hosting = makeHosting(apps.uid)
+    hosting.isEnable()
       .then((response) => {
         expect(response.enabled).to.not.equal(false)
         done()
@@ -135,5 +136,5 @@ describe('Apps hosting api Test', () => {
 })
 
 function makeHosting (appUid) {
-  return client.organization(orgID).app(appUid).hosting()
+  return client.marketplace(orgID).app(appUid).hosting()
 }

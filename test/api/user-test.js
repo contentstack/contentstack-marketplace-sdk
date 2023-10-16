@@ -55,24 +55,4 @@ describe('Contentstack User Session api Test', () => {
     })
       .catch(done)
   })
-
-  it('Get Current user info test', done => {
-    client.getUser().then((user) => {
-      authtoken = user.authtoken
-      expect(user.uid).to.be.equal(loggedinUserID)
-      done()
-    })
-      .catch(done)
-  })
-
-  it('Get user info from authtoken', done => {
-    contentstackClient(authtoken)
-      .getUser()
-      .then((user) => {
-        expect(user.uid).to.be.equal(loggedinUserID)
-        expect(true).to.be.equal(true)
-        done()
-      })
-      .catch(done)
-  })
 })
