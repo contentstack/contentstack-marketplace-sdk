@@ -4,13 +4,10 @@
 
 Contentstack is a headless CMS with an API-first approach. It is a CMS that developers can use to build powerful cross-platform applications in their favorite languages. All you have to do is build your application frontend, and Contentstack will take care of the rest. [Read More](https://www.contentstack.com/).
 
-This SDK uses the [Content Management API](https://www.contentstack.com/docs/developers/apis/content-management-api/) (CMA). The CMA is used to manage the content of your Contentstack account. This includes creating, updating, deleting, and fetching content of your account. To use the CMA, you will need to authenticate your users with a [Management Token](https://www.contentstack.com/docs/developers/create-tokens/about-management-tokens) or an [Authtoken](https://www.contentstack.com/docs/developers/apis/content-management-api/#how-to-get-authtoken). Read more about it in [Authentication](https://www.contentstack.com/docs/developers/apis/content-management-api/#authentication).
-
-Note: By using CMA, you can execute GET requests for fetching content. However, we strongly recommend that you always use the [Content Delivery API](https://www.contentstack.com/docs/developers/apis/content-delivery-api/) to deliver content to your web or mobile properties.
-
+The new Contentstack Marketplace serves as a one-stop shop for all of your integration requirements. It's where you'll find pre-built apps, starters, tutorials, and everything you'll need to create a fully customized digital experience stack. This SDK helps in managing marketplace related operations.
 ### Prerequisite
 
-You need Node.js version 10 or above installed on your machine to use the Contentstack JavaScript CMA SDK.
+You need Node.js version 10 or above installed on your machine to use the Contentstack JavaScript Marketplace SDK.
 
 ### Installation
 #### Node
@@ -36,35 +33,77 @@ contentstackClient = contentstack.client({ authtoken: 'AUTHTOKEN' })
 To Login to Contentstack by using credentials, you can use the following lines of code:
 ```
 contentstackClient.login({ email: 'EMAIL', password: 'PASSWORD'})
-.then((response) => {
-	console.log(response.notice)
-	console.log(response.user)
-})
 ```
 
-### Management Token
-[Management Tokens](https://www.contentstack.com/docs/developers/create-tokens/about-management-tokens/) are **stack-level** tokens, with no users attached to them.
+### OAuth Token
+[Contentstack OAuth](https://www.contentstack.com/docs/developers/developer-hub/contentstack-oauth) uses the OAuth 2.0 protocol that allows external applications and services to access Contentstack APIs on behalf of a user.
 ```
-contentstackClient.stack({ api_key: 'API_KEY', management_token: 'MANAGEMENT_TOKEN' }).contentType('CONTENT_TYPE_UID')
-.fetch()
-.then((contenttype) => {
-	console.log(contenttype)
-})
+contentstackClient = contentstack.client({ authorization: 'OAUTH_TOKEN' })
 ```
-### Contentstack Management JavaScript SDK: 5-minute Quickstart
+### Contentstack Marketplace JavaScript SDK: 5-minute Quickstart
 #### Initializing Your SDK:
-To use the JavaScript CMA SDK, you need to first initialize it. To do this, use the following code:
+To use the JavaScript Marketplace SDK, you need to first initialize it. To do this, use the following code:
 ```
 import contentstack from ‘@contentstack/marketplace’
 
-var contentstackClient = contentstack.client({ authtoken: 'AUTHTOKEN' })
+const contentstackClient = contentstack.client({ authtoken: 'AUTHTOKEN' })
+```
+#### Find All Marketplace Apps
+To retrieve the details of all the apps in your Contentstack organization, execute the following code:
+```
+import * as contentstack from '@contentstack/marketplace'
+
+const client = contentstack.client({ authtoken: 'TOKEN'})
+
+client.marketplace('organization_uid')
+	.findAllApps()
+	.then((collection) => {
+		console.log(collection)
+	})
+```
+#### Fetch single app details
+To retrieve the details of a particular app, execute the following code:
+```
+import * as contentstack from '@contentstack/marketplace'
+const client = contentstack.client({ authtoken: 'TOKEN'})
+
+client.marketplace('organization_uid')
+	.app('manifest_uid')
+	.fetch()
+	.then((app) => console.log(app))
+```
+#### Create a new app
+To create a new app/manifest in your Contentstack organization, execute the following code:
+```
+import * as contentstack from '@contentstack/marketplace'
+const client = contentstack.client({ authtoken: 'TOKEN'})
+const app = {
+ name: 'APP_NAME',
+ description: 'APP_DESCRIPTION',
+ target_type: 'stack'/'organization',
+ webhook: // optional
+  {
+    target_url: 'TARGET_URL',
+    channel: 'CHANNEL'
+  },
+ oauth: // optional
+  {
+    redirect_uri: 'REDIRECT_URI',
+    enabled: true,
+  }
+}
+
+client.marketplace('organization_uid')
+	.app()
+	.create(app)
+	.then((app) => console.log(app))
 ```
 
 ### Helpful Links
 
 -   [Contentstack Website](https://www.contentstack.com/)
 -   [Official Documentation](https://contentstack.com/docs)
--   [Content Management API Docs](https://www.contentstack.com/docs/developers/apis/content-management-api)
+-   [About Contentstack Marketplace](https://www.contentstack.com/docs/developers/marketplace-platform-guides/about-marketplace)
 
 ### The MIT License (MIT)
 Copyright © 2012-2023  [Contentstack](https://www.contentstack.com/). All Rights Reserved
