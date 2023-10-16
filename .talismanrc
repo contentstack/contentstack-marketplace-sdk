@@ -1,5 +1,7 @@
 threshold: medium
 fileignoreconfig:
+- filename: test/unit/mock/execution-mock.js
+  checksum: 89d239d37c9d8d0cdb6ac61553a7d2e2d9115a10207f7c0b387c3565c9cb6564
 - filename: package-lock.json
-  checksum: 71a070335979f3eed857a887e4bd36d9a1e14b08370c55117c55b45b77889b68
+  checksum: ba155edf231f5741407c8578a193a100ada623f8b1bb9c951f9f8b542c1426a7
 version: ""

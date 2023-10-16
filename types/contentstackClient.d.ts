@@ -1,9 +1,6 @@
-import { User } from './user'
 import { AxiosRequestConfig } from 'axios'
-import { AnyProperty } from './utility/fields'
-import { Pagination } from './utility/pagination'
 import { Response } from './contentstackCollection'
-import { Marketplace } from '../lib/marketplace'
+import { Marketplace } from './marketplace'
 
 export interface ProxyConfig {
     host: string
@@ -49,15 +46,11 @@ export interface LoginDetails {
     token?: string
 }
 
-export interface LoginResponse extends Response {
-    user: User
-}
-
 export interface ContentstackClient {
-    login(user: LoginDetails, params?: any): Promise<LoginResponse>
+    login(user: LoginDetails, params?: any): Promise<any>
     logout(authtoken?: string): Promise<Response>
 
-    marketplace(): Marketplace
+    marketplace(orgUid: string): Marketplace
 }
 
 export function client(config?: ContentstackConfig): ContentstackClient
