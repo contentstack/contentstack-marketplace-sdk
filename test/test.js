@@ -1,0 +1,6 @@
+require('./api/user-test')
+require('./api/hosting-test')
+require('./api/app-test')
+require('./api/app-request-test')
+require('./api/app-delete-test')
+require('./api/authorization-test')
