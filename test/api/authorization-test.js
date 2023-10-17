@@ -6,7 +6,7 @@ import { expect } from 'chai'
 
 dotenv.config()
 
-const orgID = process.env.ORGANIZATION
+const orgID = process.env.ORG_UID
 let client = {}
 let apps = {}
 
