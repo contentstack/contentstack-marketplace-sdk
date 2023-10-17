@@ -1,7 +1,7 @@
 {
-  "name": "contentstack-marketplace-javascript",
+  "name": "@contentstack/marketplace-sdk",
   "version": "1.0.0",
-  "description": "The Contentstack Manrketplace SDK is used to manage the content of your Contentstack marketplace apps",
+  "description": "The Contentstack Marketplace SDK is used to manage the content of your Contentstack marketplace apps",
   "main": "./dist/node/contentstack-marketplace.js",
   "browser": "./dist/web/contentstack-marketplace.js",
   "types": "./types/contentstackClient.d.ts",
