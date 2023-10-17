@@ -8,7 +8,7 @@ dotenv.config()
 
 let apps = {}
 let installation = {}
-const orgID = process.env.ORGANIZATION
+const orgID = process.env.ORG_UID
 let client = {}
 
 describe('Apps api Test', () => {
@@ -20,7 +20,7 @@ describe('Apps api Test', () => {
   })
 
   it('Uninstall installation test', done => {
-    client.marketplace(orgID).installation(installation.uid).uninstall()
+    client.marketplace(orgID).installation(installation.installation_uid).uninstall()
       .then((installation) => {
         expect(installation).to.deep.equal({})
         done()

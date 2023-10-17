@@ -22,7 +22,6 @@ describe('Apps api Test', () => {
   setup(() => {
     const user = jsonReader('loggedinuser.json')
     client = contentstackClient(user.authtoken)
-    stack = jsonReader('stack.json')
   })
 
   it('Fetch all apps test', done => {

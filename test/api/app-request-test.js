@@ -7,21 +7,19 @@ import { expect } from 'chai'
 dotenv.config()
 
 let apps = {}
-const orgID = process.env.ORGANIZATION
+const orgID = process.env.ORG_UID
 let client = {}
-let stack = {}
 let requestUID = ''
 describe('Apps request api Test', () => {
   setup(() => {
     const user = jsonReader('loggedinuser.json')
     client = contentstackClient(user.authtoken)
     apps = jsonReader('apps.json')
-    stack = jsonReader('stack.json')
   })
 
   it('test create app request', done => {
     client.marketplace(orgID).appRequests()
-      .create({ appUid: apps.uid, targetUid: stack.api_key })
+      .create({ appUid: apps.uid, targetUid: orgID })
       .then((response) => {
         requestUID = response.data.data.uid
         expect(response.data).to.not.equal(undefined)
