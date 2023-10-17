@@ -1,23 +1,23 @@
 [![Contentstack](https://www.contentstack.com/docs/static/images/contentstack.png)](https://www.contentstack.com/)
 
-## Contentstack Marketplace JavaScript SDK
+## Contentstack Marketplace SDK
 
 Contentstack is a headless CMS with an API-first approach. It is a CMS that developers can use to build powerful cross-platform applications in their favorite languages. All you have to do is build your application frontend, and Contentstack will take care of the rest. [Read More](https://www.contentstack.com/).
 
 The new Contentstack Marketplace serves as a one-stop shop for all of your integration requirements. It's where you'll find pre-built apps, starters, tutorials, and everything you'll need to create a fully customized digital experience stack. This SDK helps in managing marketplace related operations.
 ### Prerequisite
 
-You need Node.js version 10 or above installed on your machine to use the Contentstack JavaScript Marketplace SDK.
+You need Node.js version 10 or above installed on your machine to use the Contentstack Marketplace SDK.
 
 ### Installation
 #### Node
 Install it via npm:
 ```bash
-npm i @contentstack/marketplace
+npm i @contentstack/marketplace-sdk
 ```
 To import the SDK, use the following command:
 ```
-import contentstack from ‘@contentstack/marketplace’
+import contentstack from ‘@contentstack/marketplace-sdk’
 
 contentstackClient = contentstack.client()
 ```
@@ -40,18 +40,18 @@ contentstackClient.login({ email: 'EMAIL', password: 'PASSWORD'})
 ```
 contentstackClient = contentstack.client({ authorization: 'OAUTH_TOKEN' })
 ```
-### Contentstack Marketplace JavaScript SDK: 5-minute Quickstart
+### Contentstack Marketplace SDK: 5-minute Quickstart
 #### Initializing Your SDK:
-To use the JavaScript Marketplace SDK, you need to first initialize it. To do this, use the following code:
+To use the Marketplace SDK, you need to first initialize it. To do this, use the following code:
 ```
-import contentstack from ‘@contentstack/marketplace’
+import contentstack from ‘@contentstack/marketplace-sdk’
 
 const contentstackClient = contentstack.client({ authtoken: 'AUTHTOKEN' })
 ```
 #### Find All Marketplace Apps
 To retrieve the details of all the apps in your Contentstack organization, execute the following code:
 ```
-import * as contentstack from '@contentstack/marketplace'
+import * as contentstack from '@contentstack/marketplace-sdk'
 
 const client = contentstack.client({ authtoken: 'TOKEN'})
 
@@ -64,7 +64,7 @@ client.marketplace('organization_uid')
 #### Fetch single app details
 To retrieve the details of a particular app, execute the following code:
 ```
-import * as contentstack from '@contentstack/marketplace'
+import * as contentstack from '@contentstack/marketplace-sdk'
 const client = contentstack.client({ authtoken: 'TOKEN'})
 
 client.marketplace('organization_uid')
@@ -75,7 +75,7 @@ client.marketplace('organization_uid')
 #### Create a new app
 To create a new app/manifest in your Contentstack organization, execute the following code:
 ```
-import * as contentstack from '@contentstack/marketplace'
+import * as contentstack from '@contentstack/marketplace-sdk'
 const client = contentstack.client({ authtoken: 'TOKEN'})
 const app = {
  name: 'APP_NAME',

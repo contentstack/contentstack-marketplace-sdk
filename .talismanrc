@@ -3,7 +3,7 @@ fileignoreconfig:
 - filename: test/unit/mock/execution-mock.js
   checksum: 89d239d37c9d8d0cdb6ac61553a7d2e2d9115a10207f7c0b387c3565c9cb6564
 - filename: package-lock.json
-  checksum: ba155edf231f5741407c8578a193a100ada623f8b1bb9c951f9f8b542c1426a7
+  checksum: 8c36298fc989fb7ab78a02ede153c80f20363d8a9f57f2948d534b1436457b8a
 - filename: docdash-template/fixtures/documents/probe.js
   checksum: e841ecf889d0e82367c53c48ee0b3be8bd68d7babf4777a87ced769f29686ac4
 - filename: docdash-template/.travis.yml
