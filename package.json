@@ -8,6 +8,7 @@
   "directories": {
     "test": "test"
   },
+  "private": false,
   "nyc": {
     "exclude": [
       "**/bulkOperation",
