@@ -154,4 +154,28 @@ describe('Contentstack HTTP Client', () => {
     expect(client.defaults.retryCondition('error')).to.be.equal(true)
     done()
   })
+
+  it('Contentstack Http Client Host with region', done => {
+    var axiosInstance = contentstackHTTPClient(
+      {
+        region: 'azure-ea',
+        defaultHostName: 'defaulthost',
+        host: 'contentstack.com:443'
+      })
+    expect(axiosInstance.defaults.region).to.be.equal('azure-ea')
+    expect(axiosInstance.defaults.baseURL).to.be.equal('https://azure-ea-contentstack.com:443')
+    done()
+  })
+
+  it('Contentstack Http Client Host with wrong region credentials', done => {
+    var axiosInstance = contentstackHTTPClient(
+      {
+        region: 'region',
+        defaultHostName: 'defaulthost',
+        host: 'contentstack.com:443'
+      })
+    expect(axiosInstance.defaults.region).to.be.equal('region')
+    expect(axiosInstance.defaults.baseURL).to.be.equal('https://contentstack.com:443')
+    done()
+  })
 })
