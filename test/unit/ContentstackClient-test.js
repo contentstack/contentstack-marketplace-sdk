@@ -99,4 +99,38 @@ describe('Contentstack Client', () => {
     expect(marketplace.findAllAuthorizedApps).to.not.equal(undefined)
     done()
   })
+
+  it('Contentstack Client login success with region', done => {
+    var mock = new MockAdapter(axios)
+    axios.defaults.region = 'azure-ea'
+    mock.onPost('https://azure-ea-api.contentstack.io:443/v3/user-session').reply(200, {
+      user: {
+        authtoken: 'Test Auth'
+      }
+    })
+    ContentstackClient({ http: axios })
+      .login()
+      .then((response) => {
+        expect(response.user.authtoken).to.be.equal('Test Auth')
+        done()
+      })
+      .catch(done)
+  })
+
+  it('Contentstack Client login success with wrong region credentials', done => {
+    var mock = new MockAdapter(axios)
+    axios.defaults.region = 'region'
+    mock.onPost('https://api.contentstack.io:443/v3/user-session').reply(200, {
+      user: {
+        authtoken: 'Test Auth'
+      }
+    })
+    ContentstackClient({ http: axios })
+      .login()
+      .then((response) => {
+        expect(response.user.authtoken).to.be.equal('Test Auth')
+        done()
+      })
+      .catch(done)
+  })
 })
