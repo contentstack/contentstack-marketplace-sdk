@@ -121,7 +121,7 @@ describe('Contentstack Client', () => {
   it('Contentstack Client login success with wrong region credentials', done => {
     var mock = new MockAdapter(axios)
     axios.defaults.region = 'region'
-    mock.onPost('https://api.contentstack.io:443/v3/user-session').reply(200, {
+    mock.onPost('https://region-api.contentstack.io:443/v3/user-session').reply(200, {
       user: {
         authtoken: 'Test Auth'
       }
