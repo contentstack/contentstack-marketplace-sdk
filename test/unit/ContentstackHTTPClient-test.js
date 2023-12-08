@@ -176,7 +176,7 @@ describe('Contentstack HTTP Client', () => {
         host: 'contentstack.com:443'
       })
     expect(axiosInstance.defaults.region).to.be.equal('region')
-    expect(axiosInstance.defaults.baseURL).to.be.equal('https://contentstack.com:443')
+    expect(axiosInstance.defaults.baseURL).to.be.equal('https://region-contentstack.com:443')
     done()
   })
 })
