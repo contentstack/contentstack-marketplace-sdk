@@ -3,6 +3,7 @@ import ContentstackClient from '../../lib/contentstackClient'
 import { expect } from 'chai'
 import { describe, it, beforeEach } from 'mocha'
 import MockAdapter from 'axios-mock-adapter'
+import Region from '../../lib/core/region'
 var host = 'http://localhost/'
 
 describe('Contentstack Client', () => {
@@ -98,5 +99,22 @@ describe('Contentstack Client', () => {
     expect(marketplace.findAllApps).to.not.equal(undefined)
     expect(marketplace.findAllAuthorizedApps).to.not.equal(undefined)
     done()
+  })
+
+  it('Contentstack Client login success with region', done => {
+    var mock = new MockAdapter(axios)
+    axios.defaults.region = Region.AZURE_NA
+    mock.onPost('https://azure-na-api.contentstack.com:443/v3/user-session').reply(200, {
+      user: {
+        authtoken: 'Test Auth'
+      }
+    })
+    ContentstackClient({ http: axios })
+      .login()
+      .then((response) => {
+        expect(response.user.authtoken).to.be.equal('Test Auth')
+        done()
+      })
+      .catch(done)
   })
 })

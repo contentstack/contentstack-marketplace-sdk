@@ -1,3 +1,4 @@
+import * as contentstack from '../../lib/contentstack.js'
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 
@@ -5,8 +6,10 @@ import { contentstackClient } from '../utility/ContentstackClient'
 import axios from 'axios'
 import { jsonWrite } from '../utility/fileOperations/readwrite'
 import dotenv from 'dotenv'
+import { Region } from '../../lib/contentstack'
 dotenv.config()
-var client = contentstackClient()
+var client = contentstack.client({ region: Region.NA })
+
 describe('Contentstack User Session api Test', () => {
   it('User login wrong credentials', done => {
     contentstackClient().login({ email: process.env.EMAIL, password: process.env.PASSWORD })
