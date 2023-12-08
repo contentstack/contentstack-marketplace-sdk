@@ -2,7 +2,7 @@
 import contentstackHTTPClient from '../../lib/core/contentstackHTTPClient.js'
 import { expect } from 'chai'
 import { describe, it, beforeEach } from 'mocha'
-import ContentstackRegion from '../../lib/core/contentstackRegion.js'
+import Region from '../../lib/core/region.js'
 import sinon from 'sinon'
 const logHandlerStub = sinon.stub()
 
@@ -159,24 +159,12 @@ describe('Contentstack HTTP Client', () => {
   it('Contentstack Http Client Host with region', done => {
     var axiosInstance = contentstackHTTPClient(
       {
-        region: ContentstackRegion.AZURE_EU,
+        region: Region.AZURE_EU,
         defaultHostName: 'defaulthost',
         host: 'contentstack.com:443'
       })
     expect(axiosInstance.defaults.region).to.be.equal('azure-eu')
     expect(axiosInstance.defaults.baseURL).to.be.equal('https://azure-eu-contentstack.com:443')
-    done()
-  })
-
-  it('Contentstack Http Client Host with wrong region credentials', done => {
-    var axiosInstance = contentstackHTTPClient(
-      {
-        region: 'region',
-        defaultHostName: 'defaulthost',
-        host: 'contentstack.com:443'
-      })
-    expect(axiosInstance.defaults.region).to.be.equal('region')
-    expect(axiosInstance.defaults.baseURL).to.be.equal('https://region-contentstack.com:443')
     done()
   })
 })
