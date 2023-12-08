@@ -1,6 +1,6 @@
 {
   "name": "@contentstack/marketplace-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Contentstack Marketplace SDK is used to manage the content of your Contentstack marketplace apps",
   "main": "./dist/node/contentstack-marketplace.js",
   "browser": "./dist/web/contentstack-marketplace.js",
@@ -8,6 +8,7 @@
   "directories": {
     "test": "test"
   },
+  "private": false,
   "nyc": {
     "exclude": [
       "**/bulkOperation",
@@ -41,7 +42,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/contentstack/contentstack-marketplace-javascript.git"
+    "url": "git+https://github.com/contentstack/contentstack-marketplace-sdk.git"
   },
   "author": "Contentstack",
   "license": "MIT",
@@ -89,6 +90,6 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
-    "axios": "^1.5.1"
+    "axios": "^1.6.0"
   }
 }
