@@ -3,6 +3,7 @@ import ContentstackClient from '../../lib/contentstackClient'
 import { expect } from 'chai'
 import { describe, it, beforeEach } from 'mocha'
 import MockAdapter from 'axios-mock-adapter'
+import ContentstackRegion from '../../lib/core/contentstackRegion'
 var host = 'http://localhost/'
 
 describe('Contentstack Client', () => {
@@ -102,8 +103,8 @@ describe('Contentstack Client', () => {
 
   it('Contentstack Client login success with region', done => {
     var mock = new MockAdapter(axios)
-    axios.defaults.region = 'azure-ea'
-    mock.onPost('https://azure-ea-api.contentstack.io:443/v3/user-session').reply(200, {
+    axios.defaults.region = ContentstackRegion.AZURE_EU
+    mock.onPost('https://azure-eu-api.contentstack.io:443/v3/user-session').reply(200, {
       user: {
         authtoken: 'Test Auth'
       }
