@@ -21,10 +21,17 @@ export interface ContentstackToken {
     authtoken?: string
 }
 
+export enum Region {
+    EU =  'eu',
+    NA = '',
+    AZURE_NA = 'azure-na',
+    AZURE_EU = 'azure-eu'
+}
 export interface ContentstackConfig extends AxiosRequestConfig, ContentstackToken {
     proxy?: ProxyConfig | false
     endpoint?: string
     host?: string
+    region?: Region
     timeout?: number
     maxRequests?: number
     retryOnError?: boolean
