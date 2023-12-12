@@ -3,7 +3,7 @@ import * as Contentstack from '../..';
 import { createApp, deleteApp, fetchApp, installation, updateApp, updateAuth } from './app';
 import { orgAppRequest } from './app-request';
 import { authorization } from './authorization';
-import { login, logout } from "./contentstack.user";
+import { login, logout, loginWithRegion } from "./contentstack.user";
 import { deployment, hosting } from './hosting';
 dotenv.config()
 jest.setTimeout(10000);
@@ -12,9 +12,15 @@ const client =  Contentstack.client({
     authtoken: process.env.AUTHTOKEN,
     host: process.env.HOST,
 })
+const clientWithRegion =  Contentstack.client({
+    authtoken: process.env.AUTHTOKEN,
+    host: process.env.HOST,
+    region: Contentstack.Region.AZURE_NA
+})
 
 describe('Typescript API test', () => {
     login(client);
+    loginWithRegion(clientWithRegion);
 
     const mktplace =  client.marketplace(process.env.ORGANIZATION as string)
 
