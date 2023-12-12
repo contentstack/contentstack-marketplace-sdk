@@ -39,3 +39,18 @@ export var logout = (client: ContentstackClient) => describe('User logout test',
         .catch(done)
     })
 } )
+
+export function loginWithRegion(client: ContentstackClient) { 
+    describe('Contentstack Client Test with Region', () => {
+        test.only('Client initialization with Region', done => {
+            client.login({ email: process.env.EMAIL as string, password: process.env.PASSWORD as string }, { include_orgs: true, include_orgs_roles: true, include_stack_roles: true, include_user_settings: true })
+            .then((response) => {
+                expect(response.notice).to.be.equal('Login Successful.')
+                expect(response.user.email).to.be.equal(process.env.EMAIL)
+                client.logout()
+                done();
+            })
+            .catch(done)
+        })
+    })
+}
