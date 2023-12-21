@@ -1,12 +1,12 @@
 import { expect } from 'chai'
 import * as dotenv from 'dotenv'
-import { Hosting } from '../../types/marketplace/hosting'
+import { Hosting } from '../../types/marketplace/app/hosting' 
 dotenv.config()
 let uploadUid = ''
 let deploymentUid = ''
 export function hosting(hosting: Hosting) {
     describe('Hosting api', () => {
-        test('create upload url', done => {
+        test('should create upload url', done => {
             hosting.createUploadUrl()
             .then((response)=> {
                 uploadUid = response.upload_uid
@@ -19,7 +19,7 @@ export function hosting(hosting: Hosting) {
               .catch(done)
         })
 
-        test('isEnable hosting', done => {
+        test('should isEnable hosting', done => {
             hosting.isEnable()
             .then((response) => {
               expect(response.enabled).to.not.equal(false)
@@ -27,7 +27,7 @@ export function hosting(hosting: Hosting) {
             })
             .catch(done)
         })
-        test('test latest live deployment for apps hosting', done => {
+        test('should test latest live deployment for apps hosting', done => {
             hosting.latestLiveDeployment()
               .then((response) => {
                 expect(response).to.not.equal(undefined)
@@ -36,7 +36,7 @@ export function hosting(hosting: Hosting) {
               .catch(done)
           })
         
-        test('test enable apps hosting details', done => {
+        test('should test enable apps hosting details', done => {
             hosting.enable()
               .then((response) => {
                 expect(response.enabled).to.not.equal(true)
@@ -45,7 +45,7 @@ export function hosting(hosting: Hosting) {
               .catch(done)
           })
         
-        test('test disable apps hosting details', done => {
+        test('should test disable apps hosting details', done => {
             hosting.disable()
               .then((response) => {
                 expect(response.enabled).to.not.equal(false)
@@ -58,7 +58,7 @@ export function hosting(hosting: Hosting) {
 
 export function deployment(hosting: Hosting) {
     describe('deployment api', () => {
-        test('create deployment', done => {
+        test('should create deployment', done => {
             hosting.deployment().create({ uploadUid, fileType: 'SOURCE' })
             .then((response) => {
                 deploymentUid = response.uid
@@ -71,7 +71,7 @@ export function deployment(hosting: Hosting) {
             })
             .catch(done)
         })
-        test('find all deployment', done => {
+        test('should find all deployment', done => {
             hosting.deployment().findAll()
             .then((response) => {
                 response.items.forEach(deployment => {   
@@ -85,7 +85,7 @@ export function deployment(hosting: Hosting) {
             })
             .catch(done)
         })
-        test('test get deployment from uid for app hosting', done => {
+        test('should test get deployment from uid for app hosting', done => {
             hosting.deployment(deploymentUid).fetch()
               .then((response) => {
                 expect(response.deployment_number).to.not.equal(undefined)
@@ -98,7 +98,7 @@ export function deployment(hosting: Hosting) {
               .catch(done)
         })
         
-        test('test get deployment logs for app hosting', done => {
+        test('should test get deployment logs for app hosting', done => {
             hosting.deployment(deploymentUid).logs()
               .then((response) => {
                 for (const i in response) {
@@ -112,7 +112,7 @@ export function deployment(hosting: Hosting) {
               .catch(done)
         })
         
-        test('test get deployment signed download url for app hosting', done => {
+        test('should test get deployment signed download url for app hosting', done => {
             hosting.deployment(deploymentUid).signedDownloadUrl()
               .then((response) => {
                 expect(response.download_url).to.not.equal(undefined)
