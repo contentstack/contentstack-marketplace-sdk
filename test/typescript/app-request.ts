@@ -6,18 +6,19 @@ let requestUID = ''
 
 export function orgAppRequest (request: AppRequest) {
     describe('Org App request api', () => {
-        test('test get all request for oranization', done => {
+        test('should get all request for oranization', done => {
             request
               .findAll()
               .then((response) => {
+                requestUID = response.data[0].uid
                 expect(response.data).to.not.equal(undefined)
                 done()
               })
               .catch(done)
-          })
+        })
         
-        test('test delete app request', done => {
-        request
+        test('should delete app request', done => {
+          request
             .delete(requestUID)
             .then((response) => {
             expect(response.data).to.not.equal(undefined)
@@ -25,15 +26,16 @@ export function orgAppRequest (request: AppRequest) {
             })
             .catch(done)
         })
-        test('test create app request', done => {
+        
+        test('should create app request', done => {
             request
-              .create({ appUid: '', targetUid: process.env.APIKEY as string})
+              .create({ appUid: process.env.APP_UID as string, targetUid: process.env.APIKEY as string})
               .then((response) => {
                 requestUID = response.data.data.uid
                 expect(response.data).to.not.equal(undefined)
                 done()
               })
               .catch(done)
-          })
+        })
     })
 }
