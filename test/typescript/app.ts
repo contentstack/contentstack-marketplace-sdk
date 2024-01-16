@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import * as dotenv from 'dotenv'
-import { AppData, AppOAuth, Apps } from '../../types/marketplace'
-import { Organization } from '../../types/organization';
+import { AppData, AppOAuth, Apps } from '../../types/marketplace/app'
+import { Marketplace } from '../../types/marketplace';
 dotenv.config()
 let appUid = ''
 let installationUid = ''
@@ -9,17 +9,17 @@ let installationUid = ''
 const app: AppData  = {
     name: 'My New App',
     description: 'My new test app',
-    target_type: 'organization',
+    target_type: 'stack',
   }
 const config: AppOAuth = { redirect_uri: 'https://example.com/oauth/callback', app_token_config: { enabled: true, scopes: ['scim:manage'] }, user_token_config: { enabled: true, scopes: ['user:read', 'user:write', 'scim:manage'], allow_pkce: true } }
   
 export function createApp(apps: Apps) {
     describe('App create', () => { 
-        test('Create App', done => {
+        test('should Create App', done => {
             apps.create(app)
             .then((appResponse) => {
                 appUid = appResponse.uid
-                process.env.APP_UID =  appResponse.uid
+                // process.env.APP_UID =  appResponse.uid
                 expect(appResponse.uid).to.not.equal(undefined)
                 expect(appResponse.name).to.be.equal(app.name)
                 expect(appResponse.description).to.be.equal(app.description)
@@ -31,10 +31,10 @@ export function createApp(apps: Apps) {
     })
 }
 
-export function fetchApp(organization: Organization) {
+export function fetchApp(marketplace: Marketplace) {
     describe('App fetch', () => { 
-        test('Fetch App', done => {
-            organization.app(appUid).fetch()
+        test('should Fetch App', done => {
+            marketplace.app(appUid).fetch()
             .then((appResponse) => {
                 expect(appResponse.uid).to.not.equal(undefined)
                 expect(appResponse.name).to.be.equal(app.name)
@@ -44,20 +44,20 @@ export function fetchApp(organization: Organization) {
             }).catch(done)
         })
 
-        test('Find all Apps', done => {
-            organization.app().findAll()
+        test('should Find all Apps', done => {
+            marketplace.findAllApps()
             .then((apps) => {
                 for (const index in apps.items) {
                     const appObject = apps.items[index]
                     expect(appObject.name).to.not.equal(null)
                     expect(appObject.uid).to.not.equal(null)
                     expect(appObject.target_type).to.not.equal(null)
-                  }
+                }
                 done()
             }).catch(done)
         })
-        test('Find all Authorized Apps', done => {
-            organization.app().findAllAuthorized()
+        test('should Find all Authorized Apps', done => {
+            marketplace.findAllAuthorizedApps()
             .then((apps) => {
                 for (const index in apps.data) {
                     const appObject = apps.data[index]
@@ -71,10 +71,10 @@ export function fetchApp(organization: Organization) {
     })
 }
 
-export function updateApp(organization: Organization) {
+export function updateApp(marketplace: Marketplace) {
     describe('App update', () => {
-        test('Update App', done => {
-            const appObj = organization.app(appUid)
+        test('should Update App', done => {
+            const appObj = marketplace.app(appUid)
             Object.assign(appObj, { name: 'My Updated App' })
             appObj.update()
             .then((appResponse) => {
@@ -88,10 +88,11 @@ export function updateApp(organization: Organization) {
     })
 }
 
-export function updateAuth(organization: Organization) {
+// update Auth not present even on JS
+export function updateAuth(marketplace: Marketplace) {
     describe('App update auth', () => {
-        test('Update App auth', done => {
-            organization.app(appUid).updateOAuth({config})
+        test('should Update App auth', done => {
+            marketplace.app(appUid).updateOAuth({config})
             .then((appResponse) => {
                 expect(appResponse.redirect_uri).to.be.equal(config.redirect_uri)
                 expect(appResponse.app_token_config!).to.deep.equal(config.app_token_config)
@@ -101,8 +102,8 @@ export function updateAuth(organization: Organization) {
         })
     })
     describe('App update auth', () => {
-        test('Update App auth', done => {
-            organization.app(appUid).fetchOAuth()
+        test('should fetch App auth', done => {
+            marketplace.app(appUid).fetchOAuth()
             .then((appResponse) => {
                 expect(appResponse.redirect_uri).to.be.equal(config.redirect_uri)
                 expect(appResponse.app_token_config!).to.deep.equal(config.app_token_config)
@@ -113,15 +114,14 @@ export function updateAuth(organization: Organization) {
     })
 }
 
-export function installation(organization: Organization) {
+export function installation(marketplace: Marketplace) {
     describe('App installation', () => {
-        test('Install App', done => {
-            organization.app(appUid).install({targetType: 'stack', targetUid: process.env.APIKEY as string})
+        test('should Install App', done => {
+            marketplace.app(appUid).install({targetType: 'stack', targetUid: process.env.APIKEY as string})
             .then((installation) => {
-                installationUid = installation.uid
-                expect(installation.uid).to.not.equal(undefined)
-                expect(installation.params.organization_uid).to.be.equal(process.env.ORGANIZATION as string)
-                expect(installation.urlPath).to.be.equal(`/installations/${installation.uid}`)
+                installationUid = installation.installation_uid
+                expect(installation.installation_uid).to.not.equal(undefined)
+                expect(installation.urlPath).to.be.equal(`/installations/${installation.installation_uid}`)
                 expect(installation.fetch).to.not.equal(undefined)
                 expect(installation.update).to.not.equal(undefined)
                 expect(installation.uninstall).to.not.equal(undefined)
@@ -129,8 +129,8 @@ export function installation(organization: Organization) {
             }).catch(done)
         })
 
-        test('Get all installations', done => {
-            organization.app(appUid).installation().findAll()
+        test('should Get all installations', done => {
+            marketplace.installation().fetchAll()
             .then((installations) => {
                 for (const index in installations.items) {
                     const installationObject = installations.items[index]
@@ -145,8 +145,8 @@ export function installation(organization: Organization) {
             }).catch(done)
         })
 
-        test('Fetch App installation', done => {
-            organization.app(appUid).installation(installationUid).fetch()
+        test('should Fetch App installation', done => {
+            marketplace.installation(installationUid).fetch()
             .then((installation) => {
                 expect(installation.uid).to.be.equal(installationUid)
                 expect(installation.params.organization_uid).to.be.equal(process.env.ORGANIZATION as string)
@@ -158,42 +158,43 @@ export function installation(organization: Organization) {
             }).catch(done)
         })
 
-        test('Get installation data for App installation', done => {
-            organization.app(appUid).installation(installationUid).installationData()
+        test('should Get installation data for App installation', done => {
+            marketplace.installation(installationUid).installationData()
             .then(() => {
                 done()
             }).catch(done)
         })
 
-        test('Get Configuration for App installation', done => {
-            organization.app(appUid).installation(installationUid).configuration()
+        test('should Get Configuration for App installation', done => {
+            marketplace.installation(installationUid).configuration()
             .then(() => {
                 done()
             }).catch(done)
         })
 
-        test('Get Server Configuration for App installation', done => {
-            organization.app(appUid).installation(installationUid).serverConfig()
+        test('should Get Server Configuration for App installation', done => {
+            marketplace.installation(installationUid).serverConfig()
             .then(() => {
                 done()
             }).catch(done)
         })
 
-        test('Set Configuration for App installation', done => {
-            organization.app(appUid).installation(installationUid).setConfiguration({})
-            .then(() => {
-                done()
-            }).catch(done)
-        })
-        test('Set Server Configuration for App installation', done => {
-            organization.app(appUid).installation(installationUid).setServerConfig({})
+        test('should Set Configuration for App installation', done => {
+            marketplace.installation(installationUid).setConfiguration({})
             .then(() => {
                 done()
             }).catch(done)
         })
 
-        test('Uninstall App installation', done => {
-            organization.app(appUid).installation(installationUid).uninstall()
+        test('should Set Server Configuration for App installation', done => {
+            marketplace.installation(installationUid).setServerConfig({})
+            .then(() => {
+                done()
+            }).catch(done)
+        })
+
+        test('should Uninstall App installation', done => {
+            marketplace.installation(installationUid).uninstall()
             .then((installation) => {
                 expect(installation).to.deep.equal({})
                 done()
@@ -202,10 +203,10 @@ export function installation(organization: Organization) {
     })
 }
 
-export function deleteApp(organization: Organization) {
+export function deleteApp(marketplace: Marketplace) {
     describe('App delete', () => {
-        test('Delete App', done => {
-            organization.app(appUid).delete()
+        test('should Delete App', done => {
+            marketplace.app(appUid).delete()
             .then((appResponse) => {
                 expect(appResponse).to.deep.equal({})
                 done()
@@ -213,3 +214,5 @@ export function deleteApp(organization: Organization) {
         })
     })
 }
+
+export default appUid
