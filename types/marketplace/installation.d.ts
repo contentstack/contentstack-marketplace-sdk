@@ -11,7 +11,6 @@ export interface Installation extends SystemFields {
     serverConfig(param?: AnyProperty): Promise<AnyProperty>
     setServerConfig(config: AnyProperty): Promise<AnyProperty>
     installationData(): Promise<AnyProperty>
-    webhooks(webhookUid: string): WebHooks
 }
 
 export interface Installations {
