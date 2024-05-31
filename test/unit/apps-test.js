@@ -303,6 +303,38 @@ describe('Contentstack apps test', () => {
         done()
       })
   })
+  it('should reinstall the app', done => {
+    const mock = new MockAdapter(Axios)
+    const uid = appMock.uid
+    // using same installation mock data for reinstall
+    mock.onPut(`/manifests/${uid}/reinstall`).reply(200, {
+      data: {
+        ...installationMock
+      }
+    })
+    const targetUid = 'target_uid'
+    const targetType = 'target_type'
+    makeApp({ data: { uid } })
+      .upgrade({ targetUid, targetType })
+      .then((reinstallation) => {
+        expect(reinstallation.status).to.be.equal(installationMock.status)
+        expect(reinstallation.manifest.name).to.be.equal(installationMock.manifest.name)
+        expect(reinstallation.target.uid).to.be.equal(installationMock.target.uid)
+        expect(reinstallation.organization_uid).to.be.equal(installationMock.organization_uid)
+        expect(reinstallation.uid).to.be.equal(installationMock.uid)
+      })
+      .catch(done)
+
+    // failing test when empty data is passed
+    mock.onPut(`/manifests/${uid}/reinstall`).reply(400, {})
+    makeApp({ data: { uid } })
+      .upgrade({ targetUid, targetType })
+      .then()
+      .catch((error) => {
+        expect(error).to.not.equal(null)
+        done()
+      })
+  })
 })
 
 function checkApp (app) {
