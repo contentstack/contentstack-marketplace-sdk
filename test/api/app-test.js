@@ -6,7 +6,7 @@ import { expect } from 'chai'
 
 dotenv.config()
 
-let stack = {}
+// let stack = {}
 const orgID = process.env.ORG_UID
 let client = {}
 let appUid = ''
@@ -186,6 +186,19 @@ describe('Apps api Test', () => {
       .getRequests()
       .then((response) => {
         expect(response.data).to.not.equal(undefined)
+        done()
+      })
+      .catch(done)
+  })
+
+  it('should reinstall the app', done => {
+    client.marketplace(orgID).app(appUid).reinstall({ targetType: 'stack', targetUid: process.env.APIKEY })
+      .then((reinstallation) => {
+        expect(reinstallation.reinstallation_uid).to.not.equal(undefined)
+        expect(reinstallation.params.organization_uid).to.be.equal(orgID)
+        expect(reinstallation.fetch).to.not.equal(undefined)
+        expect(reinstallation.update).to.not.equal(undefined)
+        expect(reinstallation.uninstall).to.not.equal(undefined)
         done()
       })
       .catch(done)
