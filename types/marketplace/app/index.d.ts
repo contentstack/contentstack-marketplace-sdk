@@ -20,6 +20,7 @@ export interface App extends SystemFields, SystemFunction<App> {
         redirectUri: string, 
         scope: string, 
         state: string }): Promise<AnyProperty>
+    reinstall(data: {targetUid: string, targetType: AppTarget}): Promise<Installation>
     authorization(): Authorization
     listInstallations(): Promise<ContentstackCollection<App>>
 }
