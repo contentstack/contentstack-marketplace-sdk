@@ -192,6 +192,18 @@ export function installation(marketplace: Marketplace) {
                 done()
             }).catch(done)
         })
+        
+        test('should Reinstall App', done => {
+            marketplace.app(appUid).reinstall({targetType: 'stack', targetUid: process.env.APIKEY as string})
+            .then((reinstallation) => {
+                installationUid = reinstallation.installation_uid
+                expect(reinstallation.installation_uid).to.not.equal(undefined)
+                expect(reinstallation.fetch).to.not.equal(undefined)
+                expect(reinstallation.update).to.not.equal(undefined)
+                expect(reinstallation.uninstall).to.not.equal(undefined)
+                done()
+            }).catch(done)
+        })
 
         test('should Uninstall App installation', done => {
             marketplace.installation(installationUid).uninstall()
