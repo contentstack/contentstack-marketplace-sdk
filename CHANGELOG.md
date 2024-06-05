@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.1.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.1.0) (2024-06-11)
+ - Added GCP Region support
+
 ## [v1.0.2](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.0.2) (2024-01-16)
  - Updated dependencies
 
