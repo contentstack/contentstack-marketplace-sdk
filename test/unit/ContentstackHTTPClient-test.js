@@ -167,4 +167,16 @@ describe('Contentstack HTTP Client', () => {
     expect(axiosInstance.defaults.baseURL).to.be.equal('https://azure-eu-contentstack.com:443')
     done()
   })
+
+  it('Contentstack Http Client Host with GCP NA region', done => {
+    var axiosInstance = contentstackHTTPClient(
+      {
+        region: Region.GCP_NA,
+        defaultHostName: 'defaulthost',
+        host: 'contentstack.com:443'
+      })
+    expect(axiosInstance.defaults.region).to.be.equal('gcp-na')
+    expect(axiosInstance.defaults.baseURL).to.be.equal('https://gcp-na-contentstack.com:443')
+    done()
+  })
 })
