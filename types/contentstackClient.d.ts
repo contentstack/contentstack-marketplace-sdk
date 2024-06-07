@@ -25,7 +25,8 @@ export enum Region {
     EU =  'eu',
     NA = '',
     AZURE_NA = 'azure-na',
-    AZURE_EU = 'azure-eu'
+    AZURE_EU = 'azure-eu',
+    GCP_NA = 'gcp-na'
 }
 export interface ContentstackConfig extends AxiosRequestConfig, ContentstackToken {
     proxy?: ProxyConfig | false
