@@ -133,6 +133,15 @@ describe('Apps hosting api Test', () => {
       })
       .catch(done)
   })
+
+  it.only('should disconnect apps hosting', done => {
+    makeHosting(apps.uid).disconnect({ provider: 'launch' })
+      .then((response) => {
+        expect(response.enabled).to.not.equal(false)
+        done()
+      })
+      .catch(done)
+  })
 })
 
 function makeHosting (appUid) {
