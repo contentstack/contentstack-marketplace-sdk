@@ -225,6 +225,36 @@ describe('Contentstack hosting test', () => {
         done()
       })
   })
+
+  it('should test to disconnect hosting', done => {
+    const mock = new MockAdapter(Axios)
+    const uid = appMock.uid
+    mock.onPatch(`manifests/${uid}/hosting/disconnect`).reply(200, {
+      data: { provider: 'launch' }
+    })
+
+    makeHosting({ app_uid: uid })
+      .disconnect()
+      .then((response) => {
+        expect(response.data.provider).to.be.equal('launch')
+        done()
+      })
+      .catch(done)
+  })
+
+  it('should fail test to disconnect hosting', done => {
+    const mock = new MockAdapter(Axios)
+    const uid = appMock.uid
+    mock.onPatch(`manifests/${uid}/hosting/disconnect`).reply(400, {})
+
+    makeHosting({ app_uid: uid })
+      .disconnect()
+      .then(done)
+      .catch((error) => {
+        expect(error).to.not.equal(null)
+        done()
+      })
+  })
 })
 
 function makeHosting (data, param = {}) {
