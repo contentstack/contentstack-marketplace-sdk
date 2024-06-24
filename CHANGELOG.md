@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.1.1) (2024-06-21)
+ - Added disconnect hosting function
+
 ## [v1.1.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.1.1) (2024-06-11)
  - Added GCP Region support
 
