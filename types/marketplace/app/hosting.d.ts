@@ -8,7 +8,7 @@ export interface Hosting {
     deployment(): Deployments
     deployment(uid: string): Deployment
     latestLiveDeployment(): Promise<Deployment>
-    disconnect(): Promise<AnyProperty>
+    disconnect(data: {}): Promise<AnyProperty>
 }
 
 export interface UploadDetails {
