@@ -1,6 +1,6 @@
 {
   "name": "@contentstack/marketplace-sdk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "The Contentstack Marketplace SDK is used to manage the content of your Contentstack marketplace apps",
   "main": "./dist/node/contentstack-marketplace.js",
   "browser": "./dist/web/contentstack-marketplace.js",
@@ -34,11 +34,10 @@
     "test:debug": "BABEL_ENV=test mocha debug --require @babel/register ./test",
     "lint": "eslint lib test",
     "format": "eslint --fix lib test",
-    "prepare": "npm run build && npm run generate:docs",
+    "prepare": "npm run build",
     "pretest": "rimraf coverage && npm run lint",
     "precommit": "npm run lint",
-    "prepush": "npm run test:unit",
-    "generate:docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --readme README.md --verbose"
+    "prepush": "npm run test:unit"
   },
   "repository": {
     "type": "git",
@@ -90,6 +89,6 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
-    "axios": "^1.6.5"
+    "axios": "^1.7.2"
   }
 }
