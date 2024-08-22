@@ -1,5 +1,5 @@
 # Changelog
-## [v1.2.3](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.3) (2024-09-28)
+## [v1.2.3](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.3) (2024-08-28)
  - Axios version bump
 ## [v1.2.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.1.1) (2024-07-08)
  - added params in disconnect method in types support
