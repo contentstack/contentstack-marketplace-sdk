@@ -1,10 +1,16 @@
 # Changelog
+
 ## [v1.2.3](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.3) (2024-08-28)
  - Axios version bump
-## [v1.2.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.1.1) (2024-07-08)
+
+## [v1.2.2](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.2) (2024-07-08)
+ - Fixed the SRE issues
+
+## [v1.2.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.1) (2024-07-08)
+
  - added params in disconnect method in types support
  
-## [v1.2.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.1.1) (2024-06-21)
+## [v1.2.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.0) (2024-06-21)
  - Added disconnect hosting function
 
 ## [v1.1.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.1.1) (2024-06-11)
