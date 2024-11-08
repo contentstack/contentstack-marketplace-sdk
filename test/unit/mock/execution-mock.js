@@ -2,7 +2,7 @@ const executionLogMock = {
   uid: 'execUid',
   application_id: '***REMOVED***',
   channel: [
-    '***REMOVED***.upgrade'
+    'cs.apps.installations.***REMOVED***.upgrade'
   ],
   created_at: '2023-01-18T06:33:35.563Z',
   event_data: {
@@ -28,7 +28,7 @@ const executionLogMock = {
   },
   event_headers: {
     'content-type': 'application/json',
-    'X-Contentstack-Request-Signature': '***REMOVED***S5wnqxWlLudyun3CY1PSpyxN3+YsNlDvrMtByGBPeGKomsjYq2rXmDD59JP915f72YujQITZAH/TwEb0JUN3p/l+senKAZ7sSz77H9pOUCfzhfGJGVaooNVNwizJujgmZum68bavz9lTR7DUOYugIW3r/Jes4fEJVNha6D5pil/SKQszczAfp3z+qcMe+PTg14S83TsNZbPVJObMBf7GRJnmJ91RR6h9XKJEd8bkVqLUemzwdKikUyg09bEG2099VoxzST7aca2uDlr9W1g0Tk6QD71v9aoCq6jVvtXtIVA=='
+    'X-Contentstack-Request-Signature': 'v1=rIvt/***REMOVED***S5wnqxWlLudyun3CY1PSpyxN3+YsNlDvrMtByGBPeGKomsjYq2rXmDD59JP915f72YujQITZAH/TwEb0JUN3p/l+senKAZ7sSz77H9pOUCfzhfGJGVaooNVNwizJujgmZum68bavz9lTR7DUOYugIW3r/Jes4fEJVNha6D5pil/SKQszczAfp3z+qcMe+PTg14S83TsNZbPVJObMBf7GRJnmJ91RR6h9XKJEd8bkVqLUemzwdKikUyg09bEG2099VoxzST7aca2uDlr9W1g0Tk6QD71v9aoCq6jVvtXtIVA=='
   },
   org_uid: 'blt123a123b123c',
   request_details: [
@@ -63,7 +63,7 @@ const executionLogMock = {
         },
         headers: {
           'content-type': 'application/json',
-          'X-Contentstack-Request-Signature': '***REMOVED***S5wnqxWlLudyun3CY1PSpyxN3+YsNlDvrMtByGBPeGKomsjYq2rXmDD59JP915f72YujQITZAH/TwEb0JUN3p/l+senKAZ7sSz77H9pOUCfzhfGJGVaooNVNwizJujgmZum68bavz9lTR7DUOYugIW3r/Jes4fEJVNha6D5pil/SKQszczAfp3z+qcMe+PTg14S83TsNZbPVJObMBf7GRJnmJ91RR6h9XKJEd8bkVqLUemzwdKikUyg09bEG2099VoxzST7aca2uDlr9W1g0Tk6QD71v9aoCq6jVvtXtIVA=='
+          'X-Contentstack-Request-Signature': 'v1=rIvt/***REMOVED***S5wnqxWlLudyun3CY1PSpyxN3+YsNlDvrMtByGBPeGKomsjYq2rXmDD59JP915f72YujQITZAH/TwEb0JUN3p/l+senKAZ7sSz77H9pOUCfzhfGJGVaooNVNwizJujgmZum68bavz9lTR7DUOYugIW3r/Jes4fEJVNha6D5pil/SKQszczAfp3z+qcMe+PTg14S83TsNZbPVJObMBf7GRJnmJ91RR6h9XKJEd8bkVqLUemzwdKikUyg09bEG2099VoxzST7aca2uDlr9W1g0Tk6QD71v9aoCq6jVvtXtIVA=='
         },
         json: true,
         resolveWithFullResponse: true,

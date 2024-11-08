@@ -1,4 +1,6 @@
 # Changelog
+## [v1.2.4](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.4) (2024-10-22)
+ - Node version bump in github package publish workflow file
 
 ## [v1.2.3](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.3) (2024-08-28)
  - Axios version bump
