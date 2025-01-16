@@ -89,6 +89,6 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
-    "axios": "^1.7.4"
+    "axios": "^1.7.9"
   }
 }
