@@ -51,7 +51,7 @@ async function publishMessage (text, report) {
     channel_id: process.env.SLACK_CHANNEL_ID,
     initial_comment: '*Here is the report generated*',
     filetype: 'html',
-    filename: 'sanity-report.html',
+    filename: 'js-mp-report.html',
     file: fs.createReadStream(report)
   })
 }
