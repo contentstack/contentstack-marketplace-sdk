@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { describe, it, setup } from 'mocha'
-import { jsonReader } from '../utility/fileOperations/readwrite'
+import { jsonReader } from '../utility/fileOperations/readwrite.js'
 import { contentstackClient } from '../utility/ContentstackClient.js'
 import { expect } from 'chai'
 

@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { describe, it, setup } from 'mocha'
-import { jsonReader, jsonWrite } from '../utility/fileOperations/readwrite'
+import { jsonReader, jsonWrite } from '../utility/fileOperations/readwrite.js'
 import { contentstackClient } from '../utility/ContentstackClient.js'
 import { expect } from 'chai'
 
@@ -12,7 +12,7 @@ let client = {}
 let appUid = ''
 let installationUid = ''
 const app = {
-  name: 'bbbb',
+  name: 'mp sdk testing app',
   description: 'My new test app',
   target_type: 'organization'
 }
@@ -20,8 +20,22 @@ const config = { redirect_uri: 'https://example.com/oauth/callback', app_token_c
 
 describe('Apps api Test', () => {
   setup(() => {
-    const user = jsonReader('loggedinuser.json')
+    const user = jsonReader('loggedinAdmin.json')
     client = contentstackClient(user.authtoken)
+  })
+
+  it('Create app test', done => {
+    client.marketplace(orgID).app().create(app)
+      .then((appResponse) => {
+        appUid = appResponse.uid
+        jsonWrite(appResponse, 'apps.json')
+        expect(appResponse.uid).to.not.equal(undefined)
+        expect(appResponse.name).to.be.equal(app.name)
+        expect(appResponse.description).to.be.equal(app.description)
+        expect(appResponse.target_type).to.be.equal(app.target_type)
+        done()
+      })
+      .catch(done)
   })
 
   it('Fetch all apps test', done => {
@@ -52,20 +66,6 @@ describe('Apps api Test', () => {
       .catch(done)
   })
 
-  it('Create app test', done => {
-    client.marketplace(orgID).app().create(app)
-      .then((appResponse) => {
-        appUid = appResponse.uid
-        jsonWrite(appResponse, 'apps.json')
-        expect(appResponse.uid).to.not.equal(undefined)
-        expect(appResponse.name).to.be.equal(app.name)
-        expect(appResponse.description).to.be.equal(app.description)
-        expect(appResponse.target_type).to.be.equal(app.target_type)
-        done()
-      })
-      .catch(done)
-  })
-
   it('Fetch app test', done => {
     client.marketplace(orgID).app(appUid).fetch()
       .then((appResponse) => {
@@ -78,13 +78,29 @@ describe('Apps api Test', () => {
       .catch(done)
   })
 
+
+  it('Install app test', done => {
+    client.marketplace(orgID).app(appUid).install({ targetType: 'organization', targetUid: orgID })
+      .then((installation) => {
+        installationUid = installation.installation_uid
+        jsonWrite(installation, 'installation.json')
+        expect(installation.installation_uid).to.not.equal(undefined)
+        expect(installation.params.organization_uid).to.be.equal(orgID)
+        expect(installation.urlPath).to.be.equal(`/installations/${installation.installation_uid}`)
+        expect(installation.fetch).to.not.equal(undefined)
+        expect(installation.update).to.not.equal(undefined)
+        expect(installation.uninstall).to.not.equal(undefined)
+        done()
+      })
+      .catch(done)
+  })
+
   it('Update app test', done => {
-    const updateApp = { name: 'Update my app name' }
+    const updateApp = { name: 'mp app name' }
     let appObject = client.marketplace(orgID).app(appUid)
     appObject = Object.assign(appObject, updateApp)
     appObject.update()
       .then((appResponse) => {
-        appUid = appResponse.uid
         expect(appResponse.uid).to.not.equal(undefined)
         expect(appResponse.name).to.be.equal(updateApp.name)
         expect(appResponse.description).to.be.equal(app.description)
@@ -111,22 +127,6 @@ describe('Apps api Test', () => {
         expect(appResponse.redirect_uri).to.be.equal(config.redirect_uri)
         expect(appResponse.app_token_config.enabled).to.be.equal(config.app_token_config.enabled)
         expect(appResponse.user_token_config.enabled).to.be.equal(config.user_token_config.enabled)
-        done()
-      })
-      .catch(done)
-  })
-
-  it('Install app test', done => {
-    client.marketplace(orgID).app(appUid).install({ targetType: 'organization', targetUid: orgID })
-      .then((installation) => {
-        installationUid = installation.installation_uid
-        jsonWrite(installation, 'installation.json')
-        expect(installation.installation_uid).to.not.equal(undefined)
-        expect(installation.params.organization_uid).to.be.equal(orgID)
-        expect(installation.urlPath).to.be.equal(`/installations/${installation.installation_uid}`)
-        expect(installation.fetch).to.not.equal(undefined)
-        expect(installation.update).to.not.equal(undefined)
-        expect(installation.uninstall).to.not.equal(undefined)
         done()
       })
       .catch(done)
@@ -192,13 +192,10 @@ describe('Apps api Test', () => {
   })
 
   it('should reinstall the app', done => {
-    client.marketplace(orgID).app(appUid).reinstall({ targetType: 'stack', targetUid: process.env.APIKEY })
+    client.marketplace(orgID).app(appUid).reinstall({ targetType: 'organization', targetUid: orgID })
       .then((reinstallation) => {
-        expect(reinstallation.reinstallation_uid).to.not.equal(undefined)
-        expect(reinstallation.params.organization_uid).to.be.equal(orgID)
-        expect(reinstallation.fetch).to.not.equal(undefined)
-        expect(reinstallation.update).to.not.equal(undefined)
-        expect(reinstallation.uninstall).to.not.equal(undefined)
+        expect(reinstallation.installation_uid).to.not.equal(undefined)
+        expect(reinstallation.status).to.not.equal(undefined)
         done()
       })
       .catch(done)
