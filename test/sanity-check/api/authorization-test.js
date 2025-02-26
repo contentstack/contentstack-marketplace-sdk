@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { describe, it, setup } from 'mocha'
-import { jsonReader } from '../utility/fileOperations/readwrite'
+import { jsonReader } from '../utility/fileOperations/readwrite.js'
 import { contentstackClient } from '../utility/ContentstackClient.js'
 import { expect } from 'chai'
 
@@ -12,7 +12,7 @@ let apps = {}
 
 describe('Apps api Test', () => {
   setup(() => {
-    const user = jsonReader('loggedinuser.json')
+    const user = jsonReader('loggedinAdmin.json')
     client = contentstackClient(user.authtoken)
     apps = jsonReader('apps.json')
   })
