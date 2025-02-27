@@ -1,4 +1,10 @@
 # Changelog
+## [v1.2.6](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-03-03)
+ - Update sanity tests
+
+## [v1.2.5](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.5) (2025-01-17)
+ - Dependency update
+ 
 ## [v1.2.4](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.4) (2024-10-22)
  - Node version bump in github package publish workflow file
 
