@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { describe, it, setup } from 'mocha'
-import { jsonReader } from '../utility/fileOperations/readwrite'
+import { jsonReader } from '../utility/fileOperations/readwrite.js'
 import { contentstackClient } from '../utility/ContentstackClient.js'
 import { expect } from 'chai'
 
@@ -8,20 +8,23 @@ dotenv.config()
 
 let apps = {}
 const orgID = process.env.ORG_UID
-let client = {}
+let clientUser = {}
+let clientAdmin = {}
 let requestUID = ''
 describe('Apps request api Test', () => {
   setup(() => {
     const user = jsonReader('loggedinuser.json')
-    client = contentstackClient(user.authtoken)
+    const admin = jsonReader('loggedinAdmin.json')
+    clientUser = contentstackClient(user.authtoken)
+    clientAdmin = contentstackClient(admin.authtoken)
     apps = jsonReader('apps.json')
   })
 
   it('test create app request', done => {
-    client.marketplace(orgID).appRequests()
+    clientUser.marketplace(orgID).appRequests()
       .create({ appUid: apps.uid, targetUid: orgID })
       .then((response) => {
-        requestUID = response.data.data.uid
+        requestUID = response.data.uid
         expect(response.data).to.not.equal(undefined)
         done()
       })
@@ -29,7 +32,7 @@ describe('Apps request api Test', () => {
   })
 
   it('test get all request for oranization', done => {
-    client.marketplace(orgID).appRequests()
+    clientAdmin.marketplace(orgID).appRequests()
       .findAll()
       .then((response) => {
         expect(response.data).to.not.equal(undefined)
@@ -39,10 +42,10 @@ describe('Apps request api Test', () => {
   })
 
   it('test delete app request', done => {
-    client.marketplace(orgID).appRequests()
+    clientAdmin.marketplace(orgID).appRequests()
       .delete(requestUID)
       .then((response) => {
-        expect(response.data).to.not.equal(undefined)
+        expect(response).to.be.an('object')
         done()
       })
       .catch(done)

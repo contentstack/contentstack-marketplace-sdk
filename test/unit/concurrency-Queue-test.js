@@ -131,7 +131,7 @@ describe('Concurrency queue test', () => {
 
   it('Refresh Token on 401 with 1000 concurrent request', done => {
     var mock = new MockAdapter(axios)
-    mock.onPost('https://api.contentstack.io:443/v3/user-session').reply(200, {
+    mock.onPost('/user-session').reply(200, {
       token
     })
     const axiosClient = client({
@@ -354,7 +354,7 @@ describe('Concurrency queue test', () => {
     const fuc = (pathcontent) => {
       return () => {
         const formData = new FormData()
-        const uploadStream = createReadStream(path.join(__dirname, '../api/mock/upload.html'))
+        const uploadStream = createReadStream(path.join(__dirname, '../sanity-check/api/mock/upload.html'))
         formData.append('asset[upload]', uploadStream)
         return formData
       }
