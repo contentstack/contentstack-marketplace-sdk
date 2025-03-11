@@ -13,7 +13,7 @@ let client = {}
 
 describe('Apps api Test', () => {
   setup(() => {
-    const user = jsonReader('loggedinuser.json')
+    const user = jsonReader('loggedinAdmin.json')
     client = contentstackClient(user.authtoken)
     apps = jsonReader('apps.json')
     installation = jsonReader('installation.json')

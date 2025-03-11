@@ -21,7 +21,7 @@ describe('Contentstack Client', () => {
 
   it('Contentstack Client login success', done => {
     var mock = new MockAdapter(axios)
-    mock.onPost('https://api.contentstack.io:443/v3/user-session').reply(200, {
+    mock.onPost('/user-session').reply(200, {
       user: {
         authtoken: 'Test Auth'
       }
@@ -37,7 +37,7 @@ describe('Contentstack Client', () => {
 
   it('Contentstack Client Logout with Authtoken', done => {
     var mock = new MockAdapter(axios)
-    mock.onDelete('https://api.contentstack.io:443/v3/user-session').reply(200, {
+    mock.onDelete('/user-session').reply(200, {
       notice: 'You\'ve logged out successfully'
     })
     ContentstackClient({ http: axios })
@@ -51,7 +51,7 @@ describe('Contentstack Client', () => {
 
   it('Contentstack Client Logout', done => {
     var mock = new MockAdapter(axios)
-    mock.onDelete('https://api.contentstack.io:443/v3/user-session').reply(200, {
+    mock.onDelete('/user-session').reply(200, {
       notice: 'You\'ve logged out successfully'
     })
     axios.defaults.headers = {
