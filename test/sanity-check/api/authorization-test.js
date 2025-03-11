@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { describe, it, setup } from 'mocha'
-import { jsonReader } from '../utility/fileOperations/readwrite'
+import { jsonReader } from '../utility/fileOperations/readwrite.js'
 import { contentstackClient } from '../utility/ContentstackClient.js'
 import { expect } from 'chai'
 
@@ -9,10 +9,11 @@ dotenv.config()
 const orgID = process.env.ORG_UID
 let client = {}
 let apps = {}
+let authorizationUid = ''
 
 describe('Apps api Test', () => {
   setup(() => {
-    const user = jsonReader('loggedinuser.json')
+    const user = jsonReader('loggedinAdmin.json')
     client = contentstackClient(user.authtoken)
     apps = jsonReader('apps.json')
   })
@@ -35,8 +36,8 @@ describe('Apps api Test', () => {
       .catch(done)
   })
 
-  it('revoke all authorization apps test', done => {
-    client.marketplace(orgID).app(apps.uid).authorization().revoke('uid')
+  it('revoke authorization apps test with uid', done => {
+    client.marketplace(orgID).app(apps.uid).authorization().revoke(authorizationUid)
       .then((response) => {
         expect(response).to.not.equal(null)
         done()
