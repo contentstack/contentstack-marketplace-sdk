@@ -68,3 +68,7 @@ tsconfig.json
 .dccache
 dist
 jsdocs
+
+#Pre-commit scans
+snyk_output.log
+talisman_output.log
