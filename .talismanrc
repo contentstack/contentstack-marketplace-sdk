@@ -1,11 +1,12 @@
-threshold: medium
 fileignoreconfig:
-- filename: test/unit/mock/execution-mock.js
-  checksum: 89d239d37c9d8d0cdb6ac61553a7d2e2d9115a10207f7c0b387c3565c9cb6564
-- filename: package-lock.json
-  checksum: 0f9b6180aa8b66fdd055ef99f74f269febb07e90bbd64badf1039a4d375850b6
-- filename: docdash-template/fixtures/documents/probe.js
-  checksum: e841ecf889d0e82367c53c48ee0b3be8bd68d7babf4777a87ced769f29686ac4
-- filename: docdash-template/.travis.yml
-  checksum: b029a5bc5c1c0aa6e995ced66f52b6304653a3fc5aa84dcffe9ab9baea5923df
+  - filename: test/unit/mock/execution-mock.js
+    checksum: 89d239d37c9d8d0cdb6ac61553a7d2e2d9115a10207f7c0b387c3565c9cb6564
+  - filename: package-lock.json
+    checksum: 18308aa5b97224c9cf45e81db06a3835151f4fdf49df9451eeefef2f4a46c768
+  - filename: docdash-template/fixtures/documents/probe.js
+    checksum: e841ecf889d0e82367c53c48ee0b3be8bd68d7babf4777a87ced769f29686ac4
+  - filename: docdash-template/.travis.yml
+    checksum: b029a5bc5c1c0aa6e995ced66f52b6304653a3fc5aa84dcffe9ab9baea5923df
+  - filename: .husky/pre-commit
+    checksum: 5baabd7d2c391648163f9371f0e5e9484f8fb90fa2284cfc378732ec3192c193
 version: ""
