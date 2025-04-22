@@ -1,4 +1,8 @@
 # Changelog
+
+## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-04-28)
+ - Enh: Added params support to getInstalledApps method for enhanced flexibility
+
 ## [v1.2.6](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-03-03)
  - Update sanity tests
 
