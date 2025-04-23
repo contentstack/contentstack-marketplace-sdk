@@ -1,6 +1,7 @@
 require('./api/user-test')
 require('./api/app-test')
 require('./api/hosting-test')
+require('./api/installation')
 require('./api/app-request-test')
 require('./api/authorization-test')
 require('./api/app-delete-test')
