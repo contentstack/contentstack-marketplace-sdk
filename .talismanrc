@@ -1,5 +1,8 @@
 threshold: medium
 fileignoreconfig:
+- filename: .github/workflows/secrets-scan.yml
+  ignore_detectors:
+    - filecontent
 - filename: test/unit/mock/execution-mock.js
   checksum: 89d239d37c9d8d0cdb6ac61553a7d2e2d9115a10207f7c0b387c3565c9cb6564
 - filename: package-lock.json
