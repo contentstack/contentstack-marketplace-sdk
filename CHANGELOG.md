@@ -1,4 +1,8 @@
 # Changelog
+
+## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-05-14)
+ - Fixed base URL path logic in contentstackClient to handle when region and host not provided
+
 ## [v1.2.6](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-03-03)
  - Update sanity tests
 
