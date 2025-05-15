@@ -10,7 +10,7 @@ const user4 = process.env.USER4;
 
 const mochawesomeJsonOutput = fs.readFileSync(
   "./mochawesome-report/mochawesome.json",
-  "utf-8"
+  "utf8"
 );
 const mochawesomeReport = JSON.parse(mochawesomeJsonOutput);
 
