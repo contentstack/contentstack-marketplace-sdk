@@ -130,22 +130,15 @@ describe('Concurrency queue test', () => {
   })
 
   it('Refresh Token on 401 with 1000 concurrent request', done => {
-    var mock = new MockAdapter(axios)
-    mock.onPost('/user-session').reply(200, {
-      token
-    })
-    const axiosClient = client({
-      baseURL: `${host}:${port}`,
-      authorization: 'Bearer <token_value>',
+   const axiosClient = client({
+    baseURL: `${host}:${port}`,
+    authorization: 'Bearer <token_value>',
       logHandler: logHandlerStub,
       refreshToken: () => {
-        return new Promise((resolve, reject) => {
-          return contentstackClient({ http: axios }).login().then((res) => {
-            resolve({ authorization: res.token })
-          }).catch((error) => {
-            reject(error)
+        return Axios.post(`${host}:${port}/user-session`)
+          .then((res) => {
+            return { authorization: res.data.token }
           })
-        })
       }
     })
     Promise.all(sequence(1003).map(() => axiosClient.axiosInstance.get('/unauthorized')))
