@@ -11,7 +11,7 @@ let installation = {}
 const orgID = process.env.ORG_UID
 let client = {}
 
-describe('Apps api Test', () => {
+describe('Apps Deletion and Uninstall Test', () => {
   setup(() => {
     const user = jsonReader('loggedinAdmin.json')
     client = contentstackClient(user.authtoken)
