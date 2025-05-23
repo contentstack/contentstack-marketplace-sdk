@@ -25,8 +25,16 @@ console.log(`Failed Tests: ${failedTests}`)
 console.log(`Pending Tests: ${pendingTests}`)
 console.log(`Total Duration: ${durationInMinutes}m ${durationInSeconds.toFixed(2)}s`)
 
+const host = process.env.DEFAULTHOST || ''
+let region = 'NA'
+
+const match = host.match(/^([^-]+(?:-[^-]+)*)-api/)
+if (match && match[1]) {
+  region = match[1].toUpperCase()
+}
+
 const slackMessage = `
-*JavaScript Marketplace SDK Report*
+*JavaScript Marketplace SDK Report - ${region}*
 • Total Suites: *${totalSuites}*
 • Total Tests: *${totalTests}*
 • Passed Tests: *${passedTests}*
