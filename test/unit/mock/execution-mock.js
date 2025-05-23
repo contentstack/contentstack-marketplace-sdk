@@ -8,7 +8,7 @@ const executionLogMock = {
   event_data: {
     event: 'upgrade',
     module: 'app_installation',
-    api_key: '***REMOVED***',
+    api_key: 'api',
     data: {
       app_installation: {
         app_uid: '***REMOVED***',
@@ -20,9 +20,9 @@ const executionLogMock = {
           uid: '***REMOVED***'
         },
         created_at: '2023-01-17T06:28:15.734Z',
-        created_by: 'bltb49cd2a97bdebea6aa',
+        created_by: '',
         updated_at: '2023-01-18T06:03:56.688Z',
-        updated_by: 'bltb49cd2a97bdebea6aa'
+        updated_by: ''
       }
     }
   },
@@ -30,7 +30,7 @@ const executionLogMock = {
     'content-type': 'application/json',
     'X-Contentstack-Request-Signature': '***REMOVED***S5wnqxWlLudyun3CY1PSpyxN3+YsNlDvrMtByGBPeGKomsjYq2rXmDD59JP915f72YujQITZAH/TwEb0JUN3p/l+senKAZ7sSz77H9pOUCfzhfGJGVaooNVNwizJujgmZum68bavz9lTR7DUOYugIW3r/Jes4fEJVNha6D5pil/SKQszczAfp3z+qcMe+PTg14S83TsNZbPVJObMBf7GRJnmJ91RR6h9XKJEd8bkVqLUemzwdKikUyg09bEG2099VoxzST7aca2uDlr9W1g0Tk6QD71v9aoCq6jVvtXtIVA=='
   },
-  org_uid: 'blt123a123b123c',
+  org_uid: 'org',
   request_details: [
     {
       _id: '***REMOVED***',
@@ -43,7 +43,7 @@ const executionLogMock = {
           triggered_at: '2023-01-18T06:33:35.465Z',
           event: 'upgrade',
           module: 'app_installation',
-          api_key: '***REMOVED***',
+          api_key: 'api',
           data: {
             app_installation: {
               app_uid: '***REMOVED***',
