@@ -11,7 +11,7 @@ const apiKey = process.env.API_KEY
 let client = {}
 let apps = {}
 
-describe('Apps api Test', () => {
+describe('Apps installation test', () => {
   setup(() => {
     const user = jsonReader('loggedinAdmin.json')
     client = contentstackClient(user.authtoken)
