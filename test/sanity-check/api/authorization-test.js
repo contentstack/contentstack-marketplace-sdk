@@ -11,7 +11,7 @@ let client = {}
 let apps = {}
 let authorizationUid = ''
 
-describe('Apps api Test', () => {
+describe('Apps authorization test', () => {
   setup(() => {
     const user = jsonReader('loggedinAdmin.json')
     client = contentstackClient(user.authtoken)
