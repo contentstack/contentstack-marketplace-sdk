@@ -1,4 +1,6 @@
 # Changelog
+## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-05-26)
+ - Fix: Added params support to getInstalledApps method for enhanced flexibility
 
 ## [v1.2.7](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-05-15)
  - Fixed base URL path logic in contentstackClient to handle when region and host not provided
