@@ -1,4 +1,7 @@
 # Changelog
+## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2025-06-30)
+ - Enhancement: Retry logic to make use of x-ratelimit-remaining header
+
 ## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-05-26)
  - Fix: Added params support to getInstalledApps method for enhanced flexibility
 
