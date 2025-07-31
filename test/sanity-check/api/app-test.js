@@ -78,7 +78,6 @@ describe('Apps api Test', () => {
       .catch(done)
   })
 
-
   it('Install app test', done => {
     client.marketplace(orgID).app(appUid).install({ targetType: 'organization', targetUid: orgID })
       .then((installation) => {
