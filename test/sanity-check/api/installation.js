@@ -9,7 +9,7 @@ dotenv.config()
 const orgID = process.env.ORG_UID
 const apiKey = process.env.API_KEY
 let client = {}
-let apps = {}
+let apps = {} // eslint-disable-line no-unused-vars
 
 describe('Apps installation test', () => {
   setup(() => {
@@ -38,5 +38,5 @@ describe('Apps installation test', () => {
   })
 })
 function makeInstallation () {
-    return client.marketplace(orgID)
-  }
+  return client.marketplace(orgID)
+}
