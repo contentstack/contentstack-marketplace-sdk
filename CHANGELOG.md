@@ -1,8 +1,13 @@
 # Changelog
-## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-05-26)
+## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.9) (2024-08-04)
+ - Fix: Fixed the Linting issues
+ - Updated all the dependency to the latest version
+ - Added Pre-commit hook to run the snyk and talismand scans
+
+## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.8) (2024-05-26)
  - Fix: Added params support to getInstalledApps method for enhanced flexibility
 
-## [v1.2.7](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-05-15)
+## [v1.2.7](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.7) (2024-05-15)
  - Fixed base URL path logic in contentstackClient to handle when region and host not provided
 
 ## [v1.2.6](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-03-03)
