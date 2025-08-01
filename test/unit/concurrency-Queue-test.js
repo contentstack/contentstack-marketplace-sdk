@@ -11,7 +11,7 @@ import path from 'path'
 import multiparty from 'multiparty'
 import { client } from '../../lib/contentstack'
 import dotenv from 'dotenv'
-import contentstackClient from '../../lib/contentstackClient'
+// import contentstackClient from '../../lib/contentstackClient'
 dotenv.config()
 const axios = Axios.create()
 
@@ -130,9 +130,9 @@ describe('Concurrency queue test', () => {
   })
 
   it('Refresh Token on 401 with 1000 concurrent request', done => {
-   const axiosClient = client({
-    baseURL: `${host}:${port}`,
-    authorization: 'Bearer <token_value>',
+    const axiosClient = client({
+      baseURL: `${host}:${port}`,
+      authorization: 'Bearer <token_value>',
       logHandler: logHandlerStub,
       refreshToken: () => {
         return Axios.post(`${host}:${port}/user-session`)
@@ -158,7 +158,7 @@ describe('Concurrency queue test', () => {
 
   it('Initialize with bad axios instance', done => {
     try {
-      new ConcurrencyQueue({ axios: undefined })
+      const queue = new ConcurrencyQueue({ axios: undefined }) // eslint-disable-line no-unused-vars
       expect.fail('Undefined axios should fail')
     } catch (error) {
       expect(error.message).to.be.equal('Axios instance is not present')
@@ -275,18 +275,20 @@ describe('Concurrency queue test', () => {
     const client = Axios.create({
       baseURL: `${host}:${port}`
     })
-    const concurrency = new ConcurrencyQueue({ axios: client, config: { retryCondition: (error) => {
-      if (error.response.status === 408) {
-        return true
-      }
-      return false
-    },
-    logHandler: logHandlerStub,
-    retryDelayOptions: {
-      base: retryDelayOptionsStub()
-    },
-    retryLimit: 2,
-    retryOnError: true, timeout: 250 } })
+    const concurrency = new ConcurrencyQueue({ axios: client,
+      config: { retryCondition: (error) => {
+        if (error.response.status === 408) {
+          return true
+        }
+        return false
+      },
+      logHandler: logHandlerStub,
+      retryDelayOptions: {
+        base: retryDelayOptionsStub()
+      },
+      retryLimit: 2,
+      retryOnError: true,
+      timeout: 250 } })
     client.get('http://localhost:4444/timeout', {
       timeout: 250
     }).then(function (res) {
@@ -301,7 +303,7 @@ describe('Concurrency queue test', () => {
   })
 
   it('Concurrency with 100 failing requests retry on error with no retry condition tests', done => {
-    reconfigureQueue({ retryCondition: (error) => false })
+    reconfigureQueue({ retryCondition: (error) => false }) // eslint-disable-line handle-callback-err
     Promise.all(sequence(100).map(() => wrapPromise(api.get('/fail'))))
       .then((responses) => {
         return responses.map(r => r.data)
