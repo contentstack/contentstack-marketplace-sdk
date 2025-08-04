@@ -9,8 +9,8 @@ dotenv.config()
 let apps = {}
 const orgID = process.env.ORG_UID
 let client = {}
-let uploadUid = ''
-let deploymentUid = ''
+// const uploadUid = ''
+// const deploymentUid = ''
 describe('Apps hosting api Test', () => {
   setup(() => {
     const user = jsonReader('loggedinAdmin.json')
