@@ -9,7 +9,7 @@ dotenv.config()
 const orgID = process.env.ORG_UID
 let client = {}
 let apps = {}
-let authorizationUid = ''
+const authorizationUid = ''
 
 describe('Apps authorization test', () => {
   setup(() => {
