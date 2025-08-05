@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import { Marketplace } from '../../lib/marketplace'
 import { describe, it } from 'mocha'
 import MockAdapter from 'axios-mock-adapter'
-import { appsMock } from './mock/objects'
+import { appsMock, searchResultsMock } from './mock/objects'
 import { App } from '../../lib/marketplace/app'
 import { Installation } from '../../lib/marketplace/installation'
 import { AppRequest } from '../../lib/marketplace/apprequest'
@@ -138,6 +138,33 @@ describe('Marketplace test', () => {
       .then(done)
       .catch((error) => {
         expect(error).to.not.equal(undefined)
+        done()
+      })
+  })
+
+  it('should search apps successfully when search term is provided', done => {
+    const mock = new MockAdapter(Axios)
+    const searchResult = searchResultsMock.data[0]
+    mock.onGet('/manifests').reply(200, searchResult)
+
+    marketplaceObj({ organization_uid: 'org_uid' })
+      .searchApps('Test App 1', { order: 'desc', sort: 'created_at', target_type: 'stack' })
+      .then((response) => {
+        expect(response.uid).to.be.equal(searchResult.uid)
+        expect(response.name).to.be.equal(searchResult.name)
+        expect(response.description).to.be.equal(searchResult.description)
+        expect(response.target_type).to.be.equal(searchResult.target_type)
+        done()
+      })
+      .catch(done)
+  })
+
+  it('should throw error when search term is not provided', done => {
+    marketplaceObj({ organization_uid: 'org_uid' })
+      .searchApps()
+      .then(done)
+      .catch((error) => {
+        expect(error.message).to.be.equal('Search parameter is required')
         done()
       })
   })
