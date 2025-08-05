@@ -1,7 +1,7 @@
 # Changelog
 
 ## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-11)
- - Enh: Add search function to query installed apps by names
+ - Enh: Add search function to query apps by names
 
 ## [v1.2.9](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.9) (2024-08-04)
  - Fix: Fixed the Linting issues
