@@ -806,6 +806,38 @@ function checkSystemFields (object) {
   expect(object.updated_at).to.be.equal(systemFieldsMock.updated_at)
 }
 
+const searchResultsMock = {
+  data: [
+    {
+      uid: 'manifest_uid_1',
+      name: 'Test Search App',
+      description: 'Test search app description',
+      target_type: 'stack',
+      organization_uid: 'org_uid',
+      created_at: '2021-07-20T13:34:54.791Z',
+      updated_at: '2021-07-27T14:05:19.452Z',
+      visibility: 'private',
+      framework_version: '1.0',
+      version: 1
+    },
+    {
+      uid: 'manifest_uid_2',
+      name: 'Another Test App',
+      description: 'Another test app description',
+      target_type: 'organization',
+      organization_uid: 'org_uid',
+      created_at: '2021-07-19T13:34:54.791Z',
+      updated_at: '2021-07-26T14:05:19.452Z',
+      visibility: 'private',
+      framework_version: '1.0',
+      version: 2
+    }
+  ],
+  count: 2,
+  skip: 0,
+  limit: 10
+}
+
 export {
   appMock,
   appsMock,
@@ -856,5 +888,6 @@ export {
   auditLogsMock,
   mockCollection,
   entryMockCollection,
+  searchResultsMock,
   checkSystemFields
 }
