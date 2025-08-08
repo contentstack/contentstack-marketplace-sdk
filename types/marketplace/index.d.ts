@@ -13,5 +13,6 @@ export interface Marketplace extends SystemFields, SystemFunction<Marketplace> {
     installation(uid: string): Installation
     appRequests(): AppRequest
     findAllApps(param?: AnyProperty): Promise<ContentstackCollection<App>> 
+    searchApps(search: string, queryParams?: AnyProperty): Promise<AnyProperty>
     findAllAuthorizedApps(param?: AnyProperty): Promise<AnyProperty>
 }
