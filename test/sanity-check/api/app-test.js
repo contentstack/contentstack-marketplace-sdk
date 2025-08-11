@@ -109,6 +109,27 @@ describe('Apps api Test', () => {
       .catch(done)
   })
 
+  it('should search the app successfully', done => {
+    client.marketplace(orgID).searchApps('mp app name', { order: 'desc', sort: 'created_at', target_type: app.target_type })
+      .then((response) => {
+        expect(response.data[0].uid).to.be.equal(appUid)
+        expect(response.data[0].name).to.be.equal('mp app name')
+        expect(response.data[0].description).to.be.equal(app.description)
+        expect(response.data[0].target_type).to.be.equal(app.target_type)
+        expect(response.count).to.be.equal(1)
+        done()
+      })
+      .catch(done)
+  })
+   it('should search the app but return empty data', done => {
+    client.marketplace(orgID).searchApps('mp app name', { order: 'desc', sort: 'created_at', target_type: 'stack' })
+      .then((response) => {
+        expect(response.count).to.be.equal(0)
+        done()
+      })
+      .catch(done)
+  })
+
   it('Update OAuth app test', done => {
     client.marketplace(orgID).app(appUid).oauth().update({ config })
       .then((appResponse) => {
