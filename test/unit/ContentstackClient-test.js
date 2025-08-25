@@ -8,21 +8,21 @@ var host = 'localhost'
 
 describe('Region Test ', () => {
   it('Contentstack Client login success with region NA', done => {
-  var mock = new MockAdapter(axios)
-  axios.defaults.region = Region.NA
-  mock.onPost('https://api.contentstack.io:443/v3/user-session').reply(200, {
-    user: {
-      authtoken: 'Test Auth'
-    }
-  })
-
-  ContentstackClient({ http: axios })
-    .login()
-    .then((response) => {
-      expect(response.user.authtoken).to.be.equal('Test Auth')
-      done()
+    var mock = new MockAdapter(axios)
+    axios.defaults.region = Region.NA
+    mock.onPost('https://api.contentstack.io:443/v3/user-session').reply(200, {
+      user: {
+        authtoken: 'Test Auth'
+      }
     })
-    .catch(done)
+
+    ContentstackClient({ http: axios })
+      .login()
+      .then((response) => {
+        expect(response.user.authtoken).to.be.equal('Test Auth')
+        done()
+      })
+      .catch(done)
   })
 })
 
@@ -122,56 +122,56 @@ describe('Contentstack Client', () => {
   })
 
   it('Contentstack Client login success with region AZURE-NA', done => {
-  var mock = new MockAdapter(axios)
-  axios.defaults.region = Region.AZURE_NA
-  mock.onPost('https://azure-na-api.contentstack.com:443/v3/user-session').reply(200, {
-    user: {
-      authtoken: 'Test Auth'
-    }
-  })
-
-  ContentstackClient({ http: axios })
-    .login()
-    .then((response) => {
-      expect(response.user.authtoken).to.be.equal('Test Auth')
-      done()
+    var mock = new MockAdapter(axios)
+    axios.defaults.region = Region.AZURE_NA
+    mock.onPost('https://azure-na-api.contentstack.com:443/v3/user-session').reply(200, {
+      user: {
+        authtoken: 'Test Auth'
+      }
     })
-    .catch(done)
+
+    ContentstackClient({ http: axios })
+      .login()
+      .then((response) => {
+        expect(response.user.authtoken).to.be.equal('Test Auth')
+        done()
+      })
+      .catch(done)
   })
 
   it('Contentstack Client login success with region AZURE-EU', done => {
-  var mock = new MockAdapter(axios)
-  axios.defaults.region = Region.AZURE_EU
-  mock.onPost('https://azure-eu-api.contentstack.com:443/v3/user-session').reply(200, {
-    user: {
-      authtoken: 'Test Auth'
-    }
-  })
-
-  ContentstackClient({ http: axios })
-    .login()
-    .then((response) => {
-      expect(response.user.authtoken).to.be.equal('Test Auth')
-      done()
+    var mock = new MockAdapter(axios)
+    axios.defaults.region = Region.AZURE_EU
+    mock.onPost('https://azure-eu-api.contentstack.com:443/v3/user-session').reply(200, {
+      user: {
+        authtoken: 'Test Auth'
+      }
     })
-    .catch(done)
+
+    ContentstackClient({ http: axios })
+      .login()
+      .then((response) => {
+        expect(response.user.authtoken).to.be.equal('Test Auth')
+        done()
+      })
+      .catch(done)
   })
 
   it('Contentstack Client login success with region GCP-NA', done => {
-  var mock = new MockAdapter(axios)
-  axios.defaults.region = Region.GCP_NA
-  mock.onPost('https://gcp-na-api.contentstack.com:443/v3/user-session').reply(200, {
-    user: {
-      authtoken: 'Test Auth'
-    }
-  })
-
-  ContentstackClient({ http: axios })
-    .login()
-    .then((response) => {
-      expect(response.user.authtoken).to.be.equal('Test Auth')
-      done()
+    var mock = new MockAdapter(axios)
+    axios.defaults.region = Region.GCP_NA
+    mock.onPost('https://gcp-na-api.contentstack.com:443/v3/user-session').reply(200, {
+      user: {
+        authtoken: 'Test Auth'
+      }
     })
-    .catch(done)
+
+    ContentstackClient({ http: axios })
+      .login()
+      .then((response) => {
+        expect(response.user.authtoken).to.be.equal('Test Auth')
+        done()
+      })
+      .catch(done)
   })
 })
