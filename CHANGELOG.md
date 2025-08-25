@@ -1,7 +1,10 @@
 # Changelog
 
-## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-11)
+## [v1.4.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-25)
  - Enh: Add search function to query apps by names
+ - Enhancement: Retry logic to make use of x-ratelimit-remaining header
+
+## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-11)
  - Enhancement: Retry logic to make use of x-ratelimit-remaining header
 
 ## [v1.2.9](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.9) (2024-08-04)
