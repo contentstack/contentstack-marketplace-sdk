@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.4.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-25)
+ - Enhancement: Retry logic to make use of x-ratelimit-remaining header
+
 ## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-11)
  - Enh: Add search function to query apps by names
 
@@ -9,6 +12,7 @@
  - Added Pre-commit hook to run the snyk and talismand scans
 
 ## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.8) (2024-05-26)
+
  - Fix: Added params support to getInstalledApps method for enhanced flexibility
 
 ## [v1.2.7](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.7) (2024-05-15)
