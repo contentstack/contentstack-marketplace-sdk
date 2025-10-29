@@ -55,6 +55,66 @@ describe('Contentstack HTTP Client', () => {
     done()
   })
 
+  it('Contentstack Http Client Default Host with NA region', done => {
+    createClientRewireApi.__Rewire__('client', { create: sinon.stub() })
+    const createHttpClientStub = sinon.stub()
+    createClientRewireApi.__Rewire__('httpClient', createHttpClientStub)
+    createClientRewireApi.__Rewire__('contentstackClient', sinon.stub().returns({}))
+    client({ region: 'na' })
+    expect(createHttpClientStub.args[0][0].defaultHostName).to.be.equal('developerhub-api.contentstack.com', 'NA region host name not match')
+    createClientRewireApi.__ResetDependency__('httpClient')
+    createClientRewireApi.__ResetDependency__('contentstackClient')
+    done()
+  })
+
+  it('Contentstack Http Client Default Host with EU region', done => {
+    createClientRewireApi.__Rewire__('client', { create: sinon.stub() })
+    const createHttpClientStub = sinon.stub()
+    createClientRewireApi.__Rewire__('httpClient', createHttpClientStub)
+    createClientRewireApi.__Rewire__('contentstackClient', sinon.stub().returns({}))
+    client({ region: 'eu' })
+    expect(createHttpClientStub.args[0][0].defaultHostName).to.be.equal('eu-developerhub-api.contentstack.com', 'EU region host name not match')
+    createClientRewireApi.__ResetDependency__('httpClient')
+    createClientRewireApi.__ResetDependency__('contentstackClient')
+    done()
+  })
+
+  it('Contentstack Http Client Default Host with Azure NA region', done => {
+    createClientRewireApi.__Rewire__('client', { create: sinon.stub() })
+    const createHttpClientStub = sinon.stub()
+    createClientRewireApi.__Rewire__('httpClient', createHttpClientStub)
+    createClientRewireApi.__Rewire__('contentstackClient', sinon.stub().returns({}))
+    client({ region: 'azure-na' })
+    expect(createHttpClientStub.args[0][0].defaultHostName).to.be.equal('azure-na-developerhub-api.contentstack.com', 'Azure NA region host name not match')
+    createClientRewireApi.__ResetDependency__('httpClient')
+    createClientRewireApi.__ResetDependency__('contentstackClient')
+    done()
+  })
+
+  it('Contentstack Http Client Default Host with GCP EU region', done => {
+    createClientRewireApi.__Rewire__('client', { create: sinon.stub() })
+    const createHttpClientStub = sinon.stub()
+    createClientRewireApi.__Rewire__('httpClient', createHttpClientStub)
+    createClientRewireApi.__Rewire__('contentstackClient', sinon.stub().returns({}))
+    client({ region: 'gcp-eu' })
+    expect(createHttpClientStub.args[0][0].defaultHostName).to.be.equal('gcp-eu-developerhub-api.contentstack.com', 'GCP EU region host name not match')
+    createClientRewireApi.__ResetDependency__('httpClient')
+    createClientRewireApi.__ResetDependency__('contentstackClient')
+    done()
+  })
+
+  it('Contentstack Http Client Default Host with uppercase region', done => {
+    createClientRewireApi.__Rewire__('client', { create: sinon.stub() })
+    const createHttpClientStub = sinon.stub()
+    createClientRewireApi.__Rewire__('httpClient', createHttpClientStub)
+    createClientRewireApi.__Rewire__('contentstackClient', sinon.stub().returns({}))
+    client({ region: 'EU' })
+    expect(createHttpClientStub.args[0][0].defaultHostName).to.be.equal('eu-developerhub-api.contentstack.com', 'Uppercase EU region should be handled')
+    createClientRewireApi.__ResetDependency__('httpClient')
+    createClientRewireApi.__ResetDependency__('contentstackClient')
+    done()
+  })
+
   it('Contentstack Http Client Default Host Custom', done => {
     createClientRewireApi.__Rewire__('client', { create: sinon.stub() })
     const createHttpClientStub = sinon.stub()
