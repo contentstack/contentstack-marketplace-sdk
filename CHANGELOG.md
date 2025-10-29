@@ -1,6 +1,11 @@
 # Changelog
 
-## [v1.4.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-25)
+## [v1.4.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.1) (2025-10-28)
+ - Enhancement: Add region configuration and endpoint retrieval for cloud services
+ - Enhancement: Support for Azure and GCP regions with multi-cloud endpoint management
+ - Enhancement: New `getRegionEndpoint` utility function to retrieve region-specific service endpoints
+
+## [v1.4.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.0) (2024-08-25)
  - Enhancement: Retry logic to make use of x-ratelimit-remaining header
 
 ## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-11)
