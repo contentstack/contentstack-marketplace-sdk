@@ -9,7 +9,11 @@
         "na",
         "us",
         "aws-na",
-        "aws_na"
+        "aws_na",
+        "NA",
+        "US",
+        "AWS-NA",
+        "AWS_NA"
       ],
       "isDefault": true,
       "endpoints": {
@@ -27,7 +31,7 @@
         "developerHub": "https://developerhub-api.contentstack.com",
         "brandKit": "https://brand-kits-api.contentstack.com",
         "genAI": "https://ai.contentstack.com",
-        "personalize": "https://personalize-api.contentstack.com",
+        "personalizeManagement": "https://personalize-api.contentstack.com",
         "personalizeEdge": "https://personalize-edge.contentstack.com"
       }
     },
@@ -39,7 +43,10 @@
       "alias": [
         "eu",
         "aws-eu",
-        "aws_eu"
+        "aws_eu",
+        "EU",
+        "AWS-EU",
+        "AWS_EU"
       ],
       "isDefault": false,
       "endpoints": {
@@ -57,7 +64,7 @@
         "developerHub": "https://eu-developerhub-api.contentstack.com",
         "brandKit": "https://eu-brand-kits-api.contentstack.com",
         "genAI": "https://eu-ai.contentstack.com",
-        "personalize": "https://eu-personalize-api.contentstack.com",
+        "personalizeManagement": "https://eu-personalize-api.contentstack.com",
         "personalizeEdge": "https://eu-personalize-edge.contentstack.com"
       }
     },
@@ -69,7 +76,10 @@
       "alias": [
         "au",
         "aws-au",
-        "aws_au"
+        "aws_au",
+        "AU",
+        "AWS-AU",
+        "AWS_AU"
       ],
       "isDefault": false,
       "endpoints": {
@@ -87,7 +97,7 @@
         "developerHub": "https://au-developerhub-api.contentstack.com",
         "brandKit": "https://au-brand-kits-api.contentstack.com",
         "genAI": "https://au-ai.contentstack.com",
-        "personalize": "https://au-personalize-api.contentstack.com",
+        "personalizeManagement": "https://au-personalize-api.contentstack.com",
         "personalizeEdge": "https://au-personalize-edge.contentstack.com"
       }
     },
@@ -98,7 +108,9 @@
       "location": "North America",
       "alias": [
         "azure-na",
-        "azure_na"
+        "azure_na",
+        "AZURE-NA",
+        "AZURE_NA"
       ],
       "isDefault": false,
       "endpoints": {
@@ -116,7 +128,7 @@
         "developerHub": "https://azure-na-developerhub-api.contentstack.com",
         "brandKit": "https://azure-na-brand-kits-api.contentstack.com",
         "genAI": "https://azure-na-ai.contentstack.com",
-        "personalize": "https://azure-na-personalize-api.contentstack.com",
+        "personalizeManagement": "https://azure-na-personalize-api.contentstack.com",
         "personalizeEdge": "https://azure-na-personalize-edge.contentstack.com"
       }
     },
@@ -127,7 +139,9 @@
       "location": "Europe",
       "alias": [
         "azure-eu",
-        "azure_eu"
+        "azure_eu",
+        "AZURE-EU",
+        "AZURE_EU"
       ],
       "isDefault": false,
       "endpoints": {
@@ -145,7 +159,7 @@
         "developerHub": "https://azure-eu-developerhub-api.contentstack.com",
         "brandKit": "https://azure-eu-brand-kits-api.contentstack.com",
         "genAI": "https://azure-eu-ai.contentstack.com",
-        "personalize": "https://azure-eu-personalize-api.contentstack.com",
+        "personalizeManagement": "https://azure-eu-personalize-api.contentstack.com",
         "personalizeEdge": "https://azure-eu-personalize-edge.contentstack.com"
       }
     },
@@ -156,7 +170,9 @@
       "location": "North America",
       "alias": [
         "gcp-na",
-        "gcp_na"
+        "gcp_na",
+        "GCP-NA",
+        "GCP_NA"
       ],
       "isDefault": false,
       "endpoints": {
@@ -174,7 +190,7 @@
         "developerHub": "https://gcp-na-developerhub-api.contentstack.com",
         "brandKit": "https://gcp-na-brand-kits-api.contentstack.com",
         "genAI": "https://gcp-na-brand-kits-api.contentstack.com",
-        "personalize": "https://gcp-na-personalize-api.contentstack.com",
+        "personalizeManagement": "https://gcp-na-personalize-api.contentstack.com",
         "personalizeEdge": "https://gcp-na-personalize-edge.contentstack.com"
       }
     },
@@ -185,7 +201,9 @@
       "location": "Europe",
       "alias": [
         "gcp-eu",
-        "gcp_eu"
+        "gcp_eu",
+        "GCP-EU",
+        "GCP_EU"
       ],
       "isDefault": false,
       "endpoints": {
@@ -203,7 +221,7 @@
         "developerHub": "https://gcp-eu-developerhub-api.contentstack.com",
         "brandKit": "https://gcp-eu-brand-kits-api.contentstack.com",
         "genAI": "https://gcp-eu-brand-kits-api.contentstack.com",
-        "personalize": "https://gcp-eu-personalize-api.contentstack.com",
+        "personalizeManagement": "https://gcp-eu-personalize-api.contentstack.com",
         "personalizeEdge": "https://gcp-eu-personalize-edge.contentstack.com"
       }
     }
