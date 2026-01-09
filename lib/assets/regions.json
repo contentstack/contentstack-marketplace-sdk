@@ -30,7 +30,7 @@
         "launch": "https://launch-api.contentstack.com",
         "developerHub": "https://developerhub-api.contentstack.com",
         "brandKit": "https://brand-kits-api.contentstack.com",
-        "genAI": "https://ai.contentstack.com",
+        "genAI": "https://ai.contentstack.com/brand-kits",
         "personalizeManagement": "https://personalize-api.contentstack.com",
         "personalizeEdge": "https://personalize-edge.contentstack.com"
       }
@@ -63,7 +63,7 @@
         "launch": "https://eu-launch-api.contentstack.com",
         "developerHub": "https://eu-developerhub-api.contentstack.com",
         "brandKit": "https://eu-brand-kits-api.contentstack.com",
-        "genAI": "https://eu-ai.contentstack.com",
+        "genAI": "https://eu-ai.contentstack.com/brand-kits",
         "personalizeManagement": "https://eu-personalize-api.contentstack.com",
         "personalizeEdge": "https://eu-personalize-edge.contentstack.com"
       }
@@ -96,7 +96,7 @@
         "launch": "https://au-launch-api.contentstack.com",
         "developerHub": "https://au-developerhub-api.contentstack.com",
         "brandKit": "https://au-brand-kits-api.contentstack.com",
-        "genAI": "https://au-ai.contentstack.com",
+        "genAI": "https://au-ai.contentstack.com/brand-kits",
         "personalizeManagement": "https://au-personalize-api.contentstack.com",
         "personalizeEdge": "https://au-personalize-edge.contentstack.com"
       }
@@ -127,7 +127,7 @@
         "launch": "https://azure-na-launch-api.contentstack.com",
         "developerHub": "https://azure-na-developerhub-api.contentstack.com",
         "brandKit": "https://azure-na-brand-kits-api.contentstack.com",
-        "genAI": "https://azure-na-ai.contentstack.com",
+        "genAI": "https://azure-na-ai.contentstack.com/brand-kits",
         "personalizeManagement": "https://azure-na-personalize-api.contentstack.com",
         "personalizeEdge": "https://azure-na-personalize-edge.contentstack.com"
       }
@@ -158,7 +158,7 @@
         "launch": "https://azure-eu-launch-api.contentstack.com",
         "developerHub": "https://azure-eu-developerhub-api.contentstack.com",
         "brandKit": "https://azure-eu-brand-kits-api.contentstack.com",
-        "genAI": "https://azure-eu-ai.contentstack.com",
+        "genAI": "https://azure-eu-ai.contentstack.com/brand-kits",
         "personalizeManagement": "https://azure-eu-personalize-api.contentstack.com",
         "personalizeEdge": "https://azure-eu-personalize-edge.contentstack.com"
       }
@@ -189,7 +189,7 @@
         "launch": "https://gcp-na-launch-api.contentstack.com",
         "developerHub": "https://gcp-na-developerhub-api.contentstack.com",
         "brandKit": "https://gcp-na-brand-kits-api.contentstack.com",
-        "genAI": "https://gcp-na-brand-kits-api.contentstack.com",
+        "genAI": "https://gcp-na-ai.contentstack.com/brand-kits",
         "personalizeManagement": "https://gcp-na-personalize-api.contentstack.com",
         "personalizeEdge": "https://gcp-na-personalize-edge.contentstack.com"
       }
@@ -220,7 +220,7 @@
         "launch": "https://gcp-eu-launch-api.contentstack.com",
         "developerHub": "https://gcp-eu-developerhub-api.contentstack.com",
         "brandKit": "https://gcp-eu-brand-kits-api.contentstack.com",
-        "genAI": "https://gcp-eu-brand-kits-api.contentstack.com",
+        "genAI": "https://gcp-eu-ai.contentstack.com/brand-kits",
         "personalizeManagement": "https://gcp-eu-personalize-api.contentstack.com",
         "personalizeEdge": "https://gcp-eu-personalize-edge.contentstack.com"
       }
