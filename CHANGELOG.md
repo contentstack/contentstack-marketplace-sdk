@@ -1,29 +1,30 @@
 # Changelog
 
-## [v1.4.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.1) (2025-10-28)
- - Enhancement: Add region configuration and endpoint retrieval for cloud services
- - Enhancement: Support for Azure and GCP regions with multi-cloud endpoint management
- - Enhancement: New `getRegionEndpoint` utility function to retrieve region-specific service endpoints
+## [v1.4.2](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.2) (2026-01-12)
+ - Enhancement: Improved error messages
 
-## [v1.4.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.0) (2024-08-25)
+## [v1.4.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.1) (2026-01-05)
+ - Fix: Security issues
+
+## [v1.4.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.0) (2025-08-25)
  - Enhancement: Retry logic to make use of x-ratelimit-remaining header
 
-## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2024-08-11)
+## [v1.3.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.3.0) (2025-08-11)
  - Enh: Add search function to query apps by names
 
-## [v1.2.9](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.9) (2024-08-04)
+## [v1.2.9](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.9) (2025-08-04)
  - Fix: Fixed the Linting issues
  - Updated all the dependency to the latest version
  - Added Pre-commit hook to run the snyk and talismand scans
 
-## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.8) (2024-05-26)
+## [v1.2.8](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.8) (2025-05-26)
 
  - Fix: Added params support to getInstalledApps method for enhanced flexibility
 
-## [v1.2.7](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.7) (2024-05-15)
+## [v1.2.7](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.7) (2025-05-15)
  - Fixed base URL path logic in contentstackClient to handle when region and host not provided
 
-## [v1.2.6](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2024-03-03)
+## [v1.2.6](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.6) (2025-03-03)
  - Update sanity tests
 
 ## [v1.2.5](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.2.5) (2025-01-17)
