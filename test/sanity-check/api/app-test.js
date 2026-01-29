@@ -121,7 +121,7 @@ describe('Apps api Test', () => {
       })
       .catch(done)
   })
-   it('should search the app but return empty data', done => {
+  it('should search the app but return empty data', done => {
     client.marketplace(orgID).searchApps('mp app name', { order: 'desc', sort: 'created_at', target_type: 'stack' })
       .then((response) => {
         expect(response.count).to.be.equal(0)

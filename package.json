@@ -1,6 +1,6 @@
 {
   "name": "@contentstack/marketplace-sdk",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "The Contentstack Marketplace SDK is used to manage the content of your Contentstack marketplace apps",
   "main": "./dist/node/contentstack-marketplace.js",
   "browser": "./dist/web/contentstack-marketplace.js",
@@ -40,9 +40,7 @@
     "pretest": "rimraf coverage && npm run lint",
     "precommit": "npm run lint",
     "prepush": "npm run test:unit",
-    "husky-check": "npx husky && chmod +x .husky/pre-commit",
-    "postinstall": "curl -s --max-time 30 --fail https://artifacts.contentstack.com/regions.json -o lib/assets/regions.json || echo 'Warning: Failed to download regions.json, using existing file if available'",
-    "postupdate": "curl -s --max-time 30 --fail https://artifacts.contentstack.com/regions.json -o lib/assets/regions.json || echo 'Warning: Failed to download regions.json, using existing file if available'"
+    "husky-check": "npx husky && chmod +x .husky/pre-commit"
   },
   "repository": {
     "type": "git",
@@ -95,6 +93,7 @@
     "webpack-merge": "4.2.2"
   },
   "dependencies": {
+    "@contentstack/utils": "^1.6.3",
     "axios": "^1.13.2"
   }
 }
