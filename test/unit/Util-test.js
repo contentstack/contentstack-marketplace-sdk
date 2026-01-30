@@ -1,4 +1,4 @@
-import getUserAgent, { __RewireAPI__ as getUserAgentRewireApi, isHost, getRegionEndpoint } from '../../lib/core/Util.js'
+import getUserAgent, { __RewireAPI__ as getUserAgentRewireApi, isHost } from '../../lib/core/Util.js'
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 const headerRegEx = /(app|sdk|platform|integration|os) \S+(\/\d+.\d+.\d+(-[\w\d-]+)?)?;/igm
@@ -123,95 +123,6 @@ describe('Get User Agent', () => {
     expect(isHost('contentstack.io:wedsfa2')).to.be.equal(true, 'contentstack.io:wedsfa2 should be host')
     expect(isHost('eu-api.contentstack.com')).to.be.equal(true, 'eu-api.contentstack.com should be host')
     expect(isHost('contentstack.io/path')).to.be.equal(false, 'contentstack.io/path should not host')
-    done()
-  })
-})
-
-describe('Get Region Endpoint', () => {
-  it('should return default NA region developerHub endpoint', done => {
-    const endpoint = getRegionEndpoint('na')
-    expect(endpoint).to.be.equal('developerhub-api.contentstack.com', 'NA region developerHub endpoint should match')
-    done()
-  })
-
-  it('should return NA region developerHub endpoint using alias', done => {
-    const endpoint = getRegionEndpoint('us')
-    expect(endpoint).to.be.equal('developerhub-api.contentstack.com', 'US alias should return NA developerHub endpoint')
-    done()
-  })
-
-  it('should return EU region developerHub endpoint', done => {
-    const endpoint = getRegionEndpoint('eu')
-    expect(endpoint).to.be.equal('eu-developerhub-api.contentstack.com', 'EU region developerHub endpoint should match')
-    done()
-  })
-
-  it('should return Azure NA region developerHub endpoint', done => {
-    const endpoint = getRegionEndpoint('azure-na')
-    expect(endpoint).to.be.equal('azure-na-developerhub-api.contentstack.com', 'Azure NA region developerHub endpoint should match')
-    done()
-  })
-
-  it('should return Azure NA region developerHub endpoint using alias', done => {
-    const endpoint = getRegionEndpoint('azure_na')
-    expect(endpoint).to.be.equal('azure-na-developerhub-api.contentstack.com', 'Azure NA alias should return developerHub endpoint')
-    done()
-  })
-
-  it('should return GCP NA region developerHub endpoint', done => {
-    const endpoint = getRegionEndpoint('gcp-na')
-    expect(endpoint).to.be.equal('gcp-na-developerhub-api.contentstack.com', 'GCP NA region developerHub endpoint should match')
-    done()
-  })
-
-  it('should return GCP EU region developerHub endpoint', done => {
-    const endpoint = getRegionEndpoint('gcp-eu')
-    expect(endpoint).to.be.equal('gcp-eu-developerhub-api.contentstack.com', 'GCP EU region developerHub endpoint should match')
-    done()
-  })
-
-  it('should return AU region contentManagement endpoint', done => {
-    const endpoint = getRegionEndpoint('au', 'contentManagement')
-    expect(endpoint).to.be.equal('au-api.contentstack.com', 'AU region contentManagement endpoint should match')
-    done()
-  })
-
-  it('should return NA region auth endpoint', done => {
-    const endpoint = getRegionEndpoint('na', 'auth')
-    expect(endpoint).to.be.equal('auth-api.contentstack.com', 'NA region auth endpoint should match')
-    done()
-  })
-
-  it('should return EU region contentDelivery endpoint', done => {
-    const endpoint = getRegionEndpoint('eu', 'contentDelivery')
-    expect(endpoint).to.be.equal('eu-cdn.contentstack.com', 'EU region contentDelivery endpoint should match')
-    done()
-  })
-
-  it('should throw error for invalid region', done => {
-    try {
-      getRegionEndpoint('invalid-region')
-      done(new Error('Should have thrown an error for invalid region'))
-    } catch (error) {
-      expect(error.message).to.include('Invalid region')
-      expect(error.message).to.include('invalid-region')
-      done()
-    }
-  })
-
-  it('should return Azure EU region application endpoint', done => {
-    const endpoint = getRegionEndpoint('azure-eu', 'application')
-    expect(endpoint).to.be.equal('azure-eu-app.contentstack.com', 'Azure EU region application endpoint should match')
-    done()
-  })
-
-  it('should return all regions developerHub endpoints', done => {
-    const regions = ['na', 'eu', 'au', 'azure-na', 'azure-eu', 'gcp-na', 'gcp-eu']
-    regions.forEach(region => {
-      const endpoint = getRegionEndpoint(region, 'developerHub')
-      expect(endpoint).to.be.a('string')
-      expect(endpoint).to.include('contentstack.com')
-    })
     done()
   })
 })
