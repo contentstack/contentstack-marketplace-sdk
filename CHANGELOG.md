@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.5.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.0) (2026-02-02)
+ - Enhancement: Use `getContentstackEndpoint` from `@contentstack/utils` to set marketplace host based on region
+ - Removed local `regions.json` and `getRegionEndpoint`; region endpoints are now resolved via `@contentstack/utils`
+ - Removed `postinstall` and `postupdate` scripts that downloaded `regions.json`
+ - Fix: Removed unused imports (MESSAGES, ERROR_MESSAGES) and lint issues
+
 ## [v1.4.2](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.4.2) (2026-01-12)
  - Enhancement: Improved error messages
 
