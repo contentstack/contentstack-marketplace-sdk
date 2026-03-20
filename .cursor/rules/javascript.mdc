@@ -1,0 +1,27 @@
+---
+description: JavaScript source layout, ESLint Standard, logging for marketplace-sdk
+globs: "**/*.{js,ts}"
+alwaysApply: false
+---
+
+# JavaScript (lib / test / types)
+
+## Language and layout
+
+- **Source:** `lib/` — ES modules (`import`/`export`). Built outputs in `dist/` (Webpack + Babel); do not hand-edit `dist/`.
+- **Tests:** Mocha + Chai in `test/unit/` and `test/sanity-check/`; Jest + TypeScript samples in `test/typescript/`.
+- **Types:** Hand-maintained declarations under `types/` (e.g. `types/contentstackClient.d.ts`, `types/marketplace/**`).
+
+## Style
+
+- **ESLint:** `extends: 'standard'` (`.eslintrc.js`), `ecmaVersion: 2020`, `sourceType: 'module'`.
+- Prefer explicit, readable names; avoid drive-by reformatting unrelated code.
+
+## Logging
+
+- HTTP logging hooks: `lib/core/messageHandler.js` (`httpLogHandler` referenced from `contentstackHTTPClient`).
+- When adding diagnostics, follow existing patterns—do not replace with ad-hoc `console` in core paths unless consistent with `logHandler` usage.
+
+## Dependencies (declared)
+
+Runtime: `axios`, `@contentstack/utils`. Keep `package.json` accurate when adding imports.
