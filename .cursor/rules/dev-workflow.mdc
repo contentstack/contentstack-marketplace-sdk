@@ -1,0 +1,33 @@
+---
+description: Branches, lint/tests, PR and release expectations for marketplace-sdk
+globs: "**/*"
+alwaysApply: false
+---
+
+# Dev workflow
+
+## Branching
+
+Follow team/GitHub conventions (feature branches, PRs to default branch). Use ticket IDs in branch names when required by the team (e.g. `feat/DX-5383-...`).
+
+## Local quality gate
+
+1. `npm run lint` — ESLint on `lib/` and `test/`.
+2. `npm run test:unit` — Mocha + NYC (triggers `pretest`: cleans coverage and runs lint).
+3. Optional: `npm run test:typescript` for Jest TS samples.
+
+CI runs `npm ci` and `npm run test:unit:report:json` (see `.github/workflows/unit-test.yml`).
+
+## PR expectations
+
+- Unit tests updated or added for behavioral changes in `lib/`.
+- No committed secrets; sanity fixtures stay out of version control if they contain tokens.
+- Match existing Standard JS style and JSDoc depth on public APIs.
+
+## Releases
+
+Version lives in `package.json`. `prepare` runs `npm run build` on install/publish—ensure the `dist/` build succeeds before tagging. Coordinate npm release process with maintainers (changelog, semver).
+
+## Known script gap
+
+Root `npm test` references a non-existent `test:api` script; use `npm run test:unit` until `test:api` is defined.
