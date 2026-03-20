@@ -1,0 +1,50 @@
+---
+description: PR checklist — API docs, compat, errors, tests, Marketplace vs CDA/CMA terminology
+alwaysApply: true
+---
+
+# Code review checklist
+
+Use this for any change touching the SDK. Severity labels are optional guidance for reviewers.
+
+## API and documentation
+
+- **Public surface:** New or changed `client()`, `marketplace()`, or chain methods need **JSDoc** consistent with surrounding symbols (params, return `Promise`, examples where helpful).
+- **Types:** Update `types/**/*.d.ts` when exports or shapes change.
+
+## Product terminology
+
+- This repo is **Marketplace / Developer Hub** — **not CDA** (Delivery) and not general **stack CMA content** unless the change explicitly introduces that scope. PR text and user-facing strings must not mislabel the product.
+
+## Backward compatibility
+
+- Avoid breaking `client()` options, method signatures, or default behavior without semver intent and migration notes.
+- Preserve existing header names and axios defaults unless versioned or documented.
+
+## Errors
+
+- HTTP failures should continue to map through **`contentstackError`** patterns (status, message body fields, header redaction)—no raw axios leaks to callers unless intentional and documented.
+
+## Safety and robustness
+
+- Guard null/undefined for optional nested params consistent with existing modules.
+- No sensitive logging of full tokens (follow redaction patterns in `contentstackError`).
+
+## Dependencies and security
+
+- New dependencies need justification; run/license alignment with MIT stack.
+- Be mindful of supply-chain risk for install scripts and pinned ranges.
+
+## Tests
+
+- **Unit:** Extend `test/unit/` for logic in `lib/`.
+- **Sanity:** Only when live API checks are required—document env vars; do not commit credentials.
+- TypeScript samples: update `test/typescript/` when public types warrant it.
+
+## Severity (optional)
+
+| Level | Examples |
+|-------|----------|
+| **Blocker** | Broken default auth, security regression of tokens, published API removed without major bump |
+| **Major** | Missing tests for new behavior, incorrect error mapping, wrong docs that mislead CDA vs Marketplace |
+| **Minor** | JSDoc nits, internal naming, non-user-facing refactor |

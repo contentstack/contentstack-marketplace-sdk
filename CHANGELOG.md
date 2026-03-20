@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.5.1](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.0) (2026-03-23)
+ - Fix snyk issues
+ 
 ## [v1.5.0](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.0) (2026-02-02)
  - Enhancement: Use `getContentstackEndpoint` from `@contentstack/utils` to set marketplace host based on region
  - Removed local `regions.json` and `getRegionEndpoint`; region endpoints are now resolved via `@contentstack/utils`
