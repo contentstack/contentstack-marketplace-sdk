@@ -94,6 +94,6 @@
   },
   "dependencies": {
     "@contentstack/utils": "^1.8.0",
-    "axios": "^1.13.6"
+    "axios": "^1.15.0"
   }
 }
