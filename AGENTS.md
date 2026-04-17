@@ -1,58 +1,43 @@
-# Agent guide — @contentstack/marketplace-sdk
+# Contentstack Marketplace SDK – Agent guide
 
-## What this package is
+**Universal entry point** for contributors and AI agents. Detailed conventions live in **`skills/*/SKILL.md`**.
 
-**Contentstack Marketplace SDK** — a **JavaScript client for Marketplace / Developer Hub** operations (apps, installations, hosting, OAuth, webhooks, authorization flows against the Developer Hub API). It is **not** the [Content Delivery API (CDA)](https://www.contentstack.com/docs/developers/apis/content-delivery-api/) SDK and **not** a general stack **Content Management API (CMA)** content SDK; it targets **marketplace app lifecycle and related management APIs** using the same style of auth as CMA (authtoken, `authorization` header, optional `login`).
+## What this repo is
 
-- **Repository:** [github.com/contentstack/contentstack-marketplace-sdk](https://github.com/contentstack/contentstack-marketplace-sdk)
-- **npm:** `@contentstack/marketplace-sdk`
+| Field | Detail |
+|--------|--------|
+| **Name:** | [contentstack-marketplace-sdk](https://github.com/contentstack/contentstack-marketplace-sdk) (`@contentstack/marketplace-sdk`) |
+| **Purpose:** | Node/browser SDK for managing Contentstack **Marketplace** app content and related APIs. |
+| **Out of scope:** | Not the core Delivery/Management content APIs for arbitrary stacks—scope changes belong to product requirements. |
 
-## Tech stack
+## Tech stack (at a glance)
 
-| Area | Choice |
-|------|--------|
-| Language | JavaScript (ES modules in `lib/`), transpiled with Babel; TypeScript only for `test/typescript/` and `types/` |
-| Runtime | Node (README: 10+; CI uses Node 22.x) |
-| HTTP / JSON | [axios](https://axios-http.com/), [qs](https://github.com/ljharb/qs) for query serialization |
-| Config / regions | [@contentstack/utils](https://www.npmjs.com/package/@contentstack/utils) (`getContentstackEndpoint` for Developer Hub host) |
-| Unit / API-style tests | Mocha, Chai, NYC; Babel register for `lib/` |
-| Typecheck tests | Jest + ts-jest (`jest.config.js`) |
-| Lint | ESLint + `eslint-config-standard` (`.eslintrc.js`) |
-| Bundling | Webpack → `dist/node`, `dist/web`, etc. |
+| Area | Details |
+|------|---------|
+| Language | JavaScript (Babel transpilation); TypeScript tests via Jest (`test/typescript`) |
+| Build | Webpack configs under **`webpack/`**; outputs under **`dist/`** (`npm run build`) |
+| Tests | Mocha + NYC for unit/API tests; `npm run test:typescript` for Jest subset |
+| Lint / coverage | ESLint on `lib` and `test` (`npm run lint`); NYC coverage |
+| CI | `.github/workflows/unit-test.yml`, `check_branch.yml`, `sca-scan.yml`, `policy-scan.yml`, `npm-publish.yml` |
 
-## Public entry points (source of truth)
+## Commands (quick reference)
 
-| Role | Path |
-|------|------|
-| Factory | `lib/contentstack.js` — `client()`, exports `Region` |
-| Request surface | `lib/contentstackClient.js` — `login`, `marketplace`, `logout` |
-| HTTP stack | `lib/core/contentstackHTTPClient.js`, `lib/core/concurrency-queue.js`, `lib/core/messageHandler.js` |
-| Errors | `lib/core/contentstackError.js` |
-| Marketplace domain | `lib/marketplace/**` |
-| Published `main` | `dist/node/contentstack-marketplace.js` (build output) |
-| Type declarations | `types/contentstackClient.d.ts` and `types/marketplace/**` |
+| Command type | Command |
+|--------------|---------|
+| Build | `npm run build` |
+| Test | `npm test` (runs API + unit per `package.json`) |
+| Lint | `npm run lint` |
 
-## Commands
+## Where the documentation lives: skills
 
-```bash
-npm install
-npm run build          # clean + Babel + webpack targets
-npm run lint           # eslint lib test
-npm run format         # eslint --fix lib test
-npm run test:unit      # Mocha unit suite + NYC (also runs lint via pretest)
-npm run test:typescript # Jest on test/typescript
-npm run test:sanity-test # Mocha live stack under test/sanity-check (long timeout)
-```
+| Skill | Path | What it covers |
+|-------|------|----------------|
+| **Development workflow** | [`skills/dev-workflow/SKILL.md`](skills/dev-workflow/SKILL.md) | npm scripts, Husky, CI |
+| **Marketplace SDK** | [`skills/marketplace-sdk/SKILL.md`](skills/marketplace-sdk/SKILL.md) | Public API in `lib/`, axios usage |
+| **JavaScript tooling** | [`skills/javascript/SKILL.md`](skills/javascript/SKILL.md) | Babel, Webpack targets, dual builds |
+| **Testing** | [`skills/testing/SKILL.md`](skills/testing/SKILL.md) | Mocha, NYC, Jest, fixtures |
+| **Code review** | [`skills/code-review/SKILL.md`](skills/code-review/SKILL.md) | PR checklist |
 
-**CI (`.github/workflows/unit-test.yml`):** `npm ci` then `npm run test:unit:report:json`.
+## Using Cursor (optional)
 
-> **`npm test` caveat:** `package.json` defines `"test": "npm run test:api && npm run test:unit"` but there is **no** `test:api` script. Use `npm run test:unit` (or fix the `test` script when adding `test:api`).
-
-## Credentials and live tests
-
-Sanity tests under `test/sanity-check/` use **dotenv** and env vars such as `HOST` / `DEFAULTHOST`, `ORG_UID`, `ADMIN_EMAIL`, `USER_EMAIL`, `EMAIL`, `PASSWORD`. They also read/write JSON fixtures (e.g. `loggedinAdmin.json`) via `test/sanity-check/utility/fileOperations/readwrite.js`. Do not commit real tokens; use `.env` locally (see `.gitignore`).
-
-## Further reading for agents
-
-- [Cursor rules index](.cursor/rules/README.md) — when each rule applies and how to reference it.
-- [Skills index](skills/README.md) — deeper checklists and SDK mental model.
+If you use **Cursor**, [`.cursor/rules/README.md`](.cursor/rules/README.md) only points to **`AGENTS.md`**—same docs as everyone else.
