@@ -1,0 +1,31 @@
+---
+description: Marketplace / Developer Hub SDK — auth, host, HTTP behavior in lib/
+globs: lib/**
+alwaysApply: false
+---
+
+# Contentstack Marketplace SDK (`lib/`)
+
+This package is a **Marketplace (Developer Hub) management** client, not **CDA** and not generic **stack CMA content** APIs. Terminology and docs should say **Marketplace**, Developer Hub, apps, installations, hosting, OAuth as appropriate—avoid implying Delivery or stack entry CRUD unless adding a new surface that truly uses those APIs.
+
+## Client bootstrap
+
+- **`lib/contentstack.js` — `client(params)`:** Builds axios-based HTTP client via `contentstackHTTPClient`, merges `authtoken` / `authorization` into headers, sets `X-User-Agent` / `User-Agent` (includes `contentstack-marketplace-sdk/<version>`). Default hostname comes from `@contentstack/utils` `getContentstackEndpoint(region, 'developerHub', true)`.
+- **`Region`:** `lib/core/region.js` — `eu`, `na` (empty string), `azure-na`, `azure-eu`, `gcp-na`. Pass via `params.region` (lowercased internally).
+
+## Auth patterns (actual usage)
+
+- Headers: `authtoken` and/or `authorization` (e.g. OAuth bearer) on the axios instance.
+- **`contentstackClient.login`:** POST to `/v3/user-session` (host varies by `region` / `host`); stores returned `authtoken` on `http.defaults.headers.common`.
+- **`refreshToken`:** Optional callback in `client()` params (see JSDoc in `contentstack.js`) for token rotation.
+- **Marketplace calls:** `client.marketplace(orgUid)` → `lib/marketplace/**` (apps, installation, hosting, webhooks, OAuth helpers, authorization, app requests).
+
+## HTTP layer
+
+- **`lib/core/contentstackHTTPClient.js`:** Axios instance, default `timeout` 30000, `retryOnError` true, default `retryCondition` retries on **HTTP 429**. Uses `Qs` for `paramsSerializer` (including encoded `query` JSON). `versioningStrategy: 'path'`.
+- **Concurrency:** `lib/core/concurrency-queue.js` caps parallel requests (`maxRequests`).
+- **Errors:** Responses go through `lib/core/contentstackError.js` — enriches thrown `Error` with `status`, `errorMessage`, `errorCode`, `errors`, sanitized headers.
+
+## Official docs alignment
+
+Relate behavior to **Developer Hub / Marketplace** and **user session** documentation on [contentstack.com/docs](https://www.contentstack.com/docs), not to **CDA** delivery references unless the code explicitly integrates delivery tokens for a marketplace feature.
