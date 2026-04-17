@@ -1,52 +1,26 @@
 ---
 name: code-review
-description: Expanded PR checklist for marketplace-sdk — docs, compat, errors, terminology, tests, dependency/security notes
+description: Use when reviewing PRs for contentstack-marketplace-sdk—API, bundles, tests, and npm publish impact.
 ---
 
-# Code review (marketplace-sdk)
+# Code review – contentstack-marketplace-sdk
 
-Use with `.cursor/rules/code-review.mdc` (always-on summary). This skill adds detail and examples.
+## When to use
 
-## 1. Public API and JSDoc
+- Reviewing SDK or build-tooling changes
+- Assessing dependency bumps (axios, Babel, Webpack)
 
-- Every new exported function or fluent chain method should document parameters, return type (Promise + payload shape if stable), and Edge cases (region, required `orgUid`, token type).
-- Cross-check `types/` — `.d.ts` must match runtime exports from `lib/contentstack.js` and `lib/marketplace/**`.
+## Instructions
 
-## 2. Terminology
+### Checklist
 
-- **Marketplace / Developer Hub** — correct framing for this package.
-- **Not CDA** — do not describe this SDK as the Content Delivery API client.
-- **CMA** — only where accurate (user-session / management-style tokens); avoid saying this SDK “is the CMA SDK” if the change is marketplace-only.
+- **Bundles**: Each target (node/web/RN/NS) still builds; entry points in `package.json` remain valid.
+- **Tests**: `npm test` and `npm run lint` succeed; new behavior covered.
+- **Semver**: Breaking changes reflected in version strategy.
+- **Security**: No secrets in repo; lockfile updates reviewed.
 
-## 3. Backward compatibility
+### Severity hints
 
-- Default host derivation (`getContentstackEndpoint`, `region`) must remain stable for existing consumers.
-- Changing retry defaults, timeout, or header names is a **semver** decision.
-
-## 4. Error mapping
-
-- Reject patterns that bypass `contentstackError` for normal HTTP failures unless there is a dedicated low-level escape hatch.
-- Ensure token redaction in thrown error details stays intact when touching `contentstackError` or interceptors.
-
-## 5. Null safety and input validation
-
-- Match defensive style used in sibling modules; avoid throwing non-`Error` values from async paths.
-
-## 6. Dependencies and SCA
-
-- New packages: license compatible with MIT, minimal footprint, no unnecessary postinstall scripts.
-- Run `npm audit` / org policy as required before merge.
-
-## 7. Tests
-
-| Change type | Expectation |
-|-------------|-------------|
-| `lib/` behavior | `test/unit/` coverage or extension of existing suites |
-| Type surface | `test/typescript/` if consumers rely on types |
-| Live-only behavior | sanity suite + documented env; no secrets in repo |
-
-## 8. Severity (optional)
-
-- **Blocker:** Security, broken auth defaults, semver violation.
-- **Major:** Missing tests, wrong product labeling in docs, incorrect error mapping.
-- **Minor:** Comment/JSDoc only, internal refactor with identical behavior.
+- **Blocker**: Broken publish artifacts or failing CI.
+- **Major**: Missing tests for new HTTP paths or auth changes.
+- **Minor**: Internal refactors with green CI.
