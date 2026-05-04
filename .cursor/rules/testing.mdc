@@ -1,0 +1,35 @@
+---
+description: Mocha, Jest, sanity tests, env vars for marketplace-sdk
+globs: test/**
+alwaysApply: false
+---
+
+# Testing
+
+## Unit tests (Mocha + NYC)
+
+- **Entry:** `test/unit/index.js` requires individual `*-test.js` files.
+- **Command:** `npm run test:unit` (30s timeout, `BABEL_ENV=test`, `@babel/register`, `babel-polyfill`).
+- **Coverage:** NYC HTML + text; clover for `test:unit:report:json` (CI).
+- **Mocks:** `test/unit/mock/**`, `axios-mock-adapter`, `nock`, `sinon` as used in existing tests.
+
+## TypeScript / Jest
+
+- **Config:** `jest.config.js` — `ts-jest`, coverage to `coverage/`, tests under `test/typescript/` (`*.test.ts`, etc.).
+- **Command:** `npm run test:typescript`.
+
+## Sanity / integration-style (live API)
+
+- **Entry:** `test/sanity-check/sanity.js` requires API suites under `test/sanity-check/api/`.
+- **Command:** `npm run test:sanity-test` (or `test:sanity` which swallows failures—avoid for strict gates).
+- **Env:** `dotenv` loads `.env`. Examples from existing specs: `ORG_UID`, `HOST`, `DEFAULTHOST`, `ADMIN_EMAIL`, `USER_EMAIL`, `EMAIL`, `PASSWORD`. Utility client: `test/sanity-check/utility/ContentstackClient.js` (`host`, `defaultHostName` from env).
+- **Fixtures:** JSON read/write in `test/sanity-check/utility/fileOperations/readwrite.js` (e.g. `loggedinAdmin.json`) — treat as local secrets; never commit populated files.
+
+## Naming
+
+- Unit: `*-test.js` beside concepts (`marketplace-test.js`, `ContentstackHTTPClient-test.js`).
+- Sanity: `*-test.js` or descriptive names under `test/sanity-check/api/`.
+
+## Pretest
+
+`npm run test:unit` runs `pretest` (`rimraf coverage` + `npm run lint`) unless invoked with `--ignore-scripts`—account for lint when debugging failing tests.
