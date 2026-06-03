@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.5.3](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.3) (2026-06-08)
+ - Fix snyk issues
+
 ## [v1.5.2](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.2) (2026-05-04)
  - Fix snyk issues
 
