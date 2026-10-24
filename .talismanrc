@@ -1,12 +1,14 @@
 threshold: medium
 fileignoreconfig:
+- filename: package-lock.json
+  ignore_detectors:
+    - filecontent
+    - base64content
 - filename: .github/workflows/secrets-scan.yml
   ignore_detectors:
     - filecontent
 - filename: test/unit/mock/execution-mock.js
   checksum: 89d239d37c9d8d0cdb6ac61553a7d2e2d9115a10207f7c0b387c3565c9cb6564
-- filename: package-lock.json
-  checksum: b4458dbcb7bedc106b1abb2550db2d308f906ff344bc050ac78627adf48d4223
 - filename: docdash-template/fixtures/documents/probe.js
   checksum: e841ecf889d0e82367c53c48ee0b3be8bd68d7babf4777a87ced769f29686ac4
 - filename: docdash-template/.travis.yml
