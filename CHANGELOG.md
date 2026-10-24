@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.5.5](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.5) (2026-10-24)
+ - Fix snyk issues
+ - Publish to npm with OIDC trusted publishing
+
 ## [v1.5.4](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.4) (2026-06-29)
  - Fix snyk issues
 
