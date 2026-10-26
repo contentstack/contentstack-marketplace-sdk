@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.5.5](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.5) (2026-10-26)
+ - Fix snyk issues: bump axios to ^1.20.0 and update follow-redirects to 1.16.2
+
 ## [v1.5.4](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.4) (2026-06-29)
  - Fix snyk issues
 

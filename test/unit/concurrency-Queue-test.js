@@ -1,7 +1,10 @@
 import Axios from 'axios'
 import sinon from 'sinon'
 import { expect } from 'chai'
-import http from 'http'
+import https from 'https'
+import os from 'os'
+import { execFileSync } from 'child_process'
+import { mkdtempSync, readFileSync, rmSync } from 'fs'
 import { describe, it } from 'mocha'
 import MockAdapter from 'axios-mock-adapter'
 import { ConcurrencyQueue } from '../../lib/core/concurrency-queue'
@@ -16,7 +19,21 @@ dotenv.config()
 const axios = Axios.create()
 
 let server
-var host = 'http://localhost'
+let tlsDir
+let tlsCert
+let originalCa
+
+// The test server speaks TLS with a throwaway self-signed certificate that is generated per run
+// and trusted only while this file's tests run (see before/after below).
+function createSelfSignedCert () {
+  tlsDir = mkdtempSync(path.join(os.tmpdir(), 'concurrency-queue-tls-'))
+  const keyPath = path.join(tlsDir, 'key.pem')
+  const certPath = path.join(tlsDir, 'cert.pem')
+  execFileSync('openssl', ['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', keyPath, '-out', certPath,
+    '-subj', '/CN=localhost', '-days', '1', '-addext', 'subjectAltName=DNS:localhost'], { stdio: 'ignore' })
+  return { key: readFileSync(keyPath), cert: readFileSync(certPath) }
+}
+var host = 'https://localhost'
 var port = 4444
 
 const api = Axios.create({
@@ -68,7 +85,11 @@ var unauthorized = false
 var token = 'Bearer <token_value_new>'
 describe('Concurrency queue test', () => {
   before(() => {
-    server = http.createServer((req, res) => {
+    const tls = createSelfSignedCert()
+    tlsCert = tls.cert
+    originalCa = https.globalAgent.options.ca
+    https.globalAgent.options.ca = tls.cert
+    server = https.createServer(tls, (req, res) => {
       if (req.url === '/user-session') {
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify({ token }))
@@ -127,6 +148,11 @@ describe('Concurrency queue test', () => {
       server.close()
       server = null
     }
+    https.globalAgent.options.ca = originalCa
+    if (tlsDir) {
+      rmSync(tlsDir, { recursive: true, force: true })
+      tlsDir = null
+    }
   })
 
   it('Refresh Token on 401 with 1000 concurrent request', done => {
@@ -141,6 +167,8 @@ describe('Concurrency queue test', () => {
           })
       }
     })
+    // The SDK client disables the shared agent (httpsAgent: false), so trust the test certificate explicitly.
+    axiosClient.axiosInstance.defaults.httpsAgent = new https.Agent({ ca: tlsCert })
     Promise.all(sequence(1003).map(() => axiosClient.axiosInstance.get('/unauthorized')))
       .then((responses) => {
         return responses.map(r => r.config.headers.authorization)
@@ -258,7 +286,7 @@ describe('Concurrency queue test', () => {
       baseURL: `${host}:${port}`
     })
     const concurrency = new ConcurrencyQueue({ axios: client, config: { retryOnError: true, timeout: 250 } })
-    client.get('http://localhost:4444/timeout', {
+    client.get('https://localhost:4444/timeout', {
       timeout: 250
     }).then(function (res) {
       expect(res).to.be.equal(null)
@@ -289,7 +317,7 @@ describe('Concurrency queue test', () => {
       retryLimit: 2,
       retryOnError: true,
       timeout: 250 } })
-    client.get('http://localhost:4444/timeout', {
+    client.get('https://localhost:4444/timeout', {
       timeout: 250
     }).then(function (res) {
       expect(res).to.be.equal(null)
