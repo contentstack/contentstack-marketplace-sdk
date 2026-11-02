@@ -2,6 +2,7 @@
 
 ## [v1.5.5](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.5) (2026-10-26)
  - Fix snyk issues: bump axios to ^1.20.0 and update follow-redirects to 1.16.2
+ - Refresh transitive dependencies in package-lock.json and bump mocha to ^11.8.0 and mochawesome to ^7.1.4 (Snyk fixes, from #153)
 
 ## [v1.5.4](https://github.com/contentstack/contentstack-marketplace-sdk/tree/v1.5.4) (2026-06-29)
  - Fix snyk issues
