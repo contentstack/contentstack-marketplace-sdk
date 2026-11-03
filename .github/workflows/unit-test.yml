@@ -5,6 +5,9 @@ jobs:
   build-test:
     name: Build & Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write          # the coverage report posts a PR comment
     steps:
       - uses: actions/checkout@v2     # checkout the repo
       - uses: actions/setup-node@v3
